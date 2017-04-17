@@ -12,7 +12,7 @@ const route: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'courses', component: MyCoursesComponent },
-  { path: '**', redirectTo: 'page-not-found', pathMatch: 'full' }
+  { path: '**', component: PageNotFoundComponent }
   ];
 
 @NgModule({
