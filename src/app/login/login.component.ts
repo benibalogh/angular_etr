@@ -40,6 +40,7 @@ export class LoginComponent implements OnInit {
       for(var u of this.user){
         if(form.value.username == u.username){
           if(form.value.password == u.password){
+            sessionStorage.setItem('userid', u.userid.toString());
             sessionStorage.setItem('name', u.username);
             this.router.navigate(['/courses']);
           }else {
@@ -48,6 +49,8 @@ export class LoginComponent implements OnInit {
           }
         }
       }
+      this.errorMessage = "Nincs ilyen felhasználónév";
+      return;
     } else{
       return;
     }
