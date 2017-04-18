@@ -17,9 +17,12 @@ export class LoginComponent implements OnInit {
     user:User[];
     data;
     loggedIn:Boolean;
+    valid:Boolean
+    debug;
  
     constructor(private http:Http, private getDataService: GetDataService, private router:Router) {
-
+      this.getDataService.getDatas().subscribe(
+      user => this.user = user);
     }
 
   ngOnInit() {
@@ -27,18 +30,28 @@ export class LoginComponent implements OnInit {
   }
 
   login(form: NgForm){
-      console.log(this.user);
-      if(!form.valid){
-        if(form.value.username == "" || form.value.password =="")
-          this.errorMessage = "sadasdasd";
-          return;
-      }
-      this.getDataService.getDatas().subscribe(
-      user => this.user = user);
-    
+    this.valid = true;
+    if(form.value.username == "" || form.value.password ==""){
+      this.errorMessage = "üres valamelyik mező";
+      this.valid = false;
+    }
 
-    
-    
-  }
-  
+    if(this.valid){
+      for(var u of this.user){
+        if(form.value.username == u.username){
+          if(form.value.password == u.password){
+            sessionStorage.setItem('name', u.username);
+            this.router.navigate(['/courses']);
+          }else {
+            this.errorMessage = "Nem jó a jelszó";
+            return;
+          }
+        }
+      }
+    } else{
+      return;
+    }
+ 
+ }
+
 }
