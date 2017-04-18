@@ -1,4 +1,23 @@
-<p>
+<div id="welcome">
   Kedves {{ username | uppercase}} be vagy jelentkezve.
-</p>
-<li *ngFor="let asd of mycourses"> {{asd.userid}}</li> 
+<div *ngFor="let asd of mycourses"> 
+  <div *ngIf="userid == asd.userid"> 
+    <div *ngIf="asd.courses != ''; else nulldiv">
+      Íme a kurzusaid listája:
+      <div *ngFor="let subscribedCourses of asd.courses">
+        <div *ngFor="let c of courses">
+          <div *ngIf="subscribedCourses == c.courseid">
+            <br>
+            <div>
+              Kurzus neve: {{c.name}} <br>
+              kreditek száma: {{c.credits}} <br> 
+              Tanár neve: {{c.teacher}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> 
+</div>
+<template  #nulldiv>Nincs felvéve kurzusod :(</template >
+</div>

@@ -14,7 +14,7 @@
 			},
 			{
 				"userid": 3,
-				"username": "Körte",
+				"username": "körte",
 				"password": "fagyi"
 			}
 		],
@@ -29,7 +29,7 @@
 			},
 			{
 				"userid": 3,
-				"courses": [4,2]			
+				"courses": []			
 			}
 		],
 		"courses":[
