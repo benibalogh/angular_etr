@@ -2,7 +2,7 @@
   <!-- Kedves {{ username | uppercase}}, be vagy jelentkezve. -->
 <div *ngFor="let mycourse of mycourses">
   <div *ngIf="userid == mycourse.userid">
-    <div *ngIf="mycourse.courses != ''; else nulldiv">
+    <div *ngIf="mycourse.courseids != ''; else nulldiv">
       Íme a kurzusaid listája:
       <div *ngFor="let subscribedCourseIds of mycourse.courseids">
         <div *ngFor="let course of courses">
