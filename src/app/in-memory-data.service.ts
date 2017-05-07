@@ -3,15 +3,17 @@ import { InMemoryDbService } from 'angular-in-memory-web-api';
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
     let users = [
-      {userid: 1, username: 'admin', password: 'admin'},
-      {userid: 2, username: 'user', password: 'alma'},
-      {userid: 3, username: 'körte', password: 'fagyi'}
+      {id: 1, username: 'admin', password: 'admin', email: 'admin@admin.com', name: 'Kan Ada', birthdate: new Date(2017, 4, 6), gender: 'N'},
+      {id: 2, username: 'user', password: 'alma', email: 'user@gmail.com', name: 'Vastag Helga', birthdate: new Date(1990, 0, 2), gender: 'N'},
+      {id: 3, username: 'körte', password: 'fagyi', email: 'korte@gmail.com', name: 'Alma Körte', birthdate: new Date(1947, 10, 10), gender: 'N'},
+      {id: 4, username: 'default', password: 'default', email: 'default@gmail.com', name: 'Default István', birthdate: new Date(2000, 2, 21), gender: 'F'}
     ];
 
     let mycourses = [
       {userid: 1, courseids: [1, 2, 3]},
       {userid: 2, courseids: [2, 4, 1]},
-      {userid: 3, courseids: []}
+      {userid: 3, courseids: []},
+      {userid: 4, courseids: [3, 4]}
     ];
 
     let courses = [
@@ -43,4 +45,5 @@ export class InMemoryDataService implements InMemoryDbService {
 
     return {users, mycourses, courses};
   }
+
 }

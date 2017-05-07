@@ -4,7 +4,7 @@ import { NgForm} from '@angular/forms';
 import { Http } from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { GetDataService } from '../getdata/get-data.service';
-import {User} from '../interfaces/user';
+import { User } from '../interfaces/user';
 
 @Component({
   selector: 'app-login',
@@ -36,23 +36,23 @@ export class LoginComponent implements OnInit {
       this.loading = true;
       this.getDataService.getUsers()
       .then((users) => {
-            this.users = users;
-            for (const u of this.users) {
-              if (form.value.username === u.username) {
-                if (form.value.password === u.password) {
-                  sessionStorage.setItem('userid', u.userid.toString());
-                  sessionStorage.setItem('name', u.username);
-                  this.router.navigate(['/dashboard']);
-                } else {
-                  this.errorMessage = 'Nem jó a jelszó';
-                  this.loading = false;
-                  return;
-                }
-              }
+        this.users = users;
+        for (const u of this.users) {
+          if (form.value.username === u.username) {
+            if (form.value.password === u.password) {
+              sessionStorage.setItem('userid', u.id.toString());
+              sessionStorage.setItem('name', u.name);
+              this.router.navigate(['/dashboard']);
+            } else {
+              this.errorMessage = 'Nem jó a jelszó';
+              this.loading = false;
+              return;
             }
-            this.errorMessage = 'Nincs ilyen felhasználónév';
-            this.loading = false;
-            return;
+          }
+        }
+        this.errorMessage = 'Nincs ilyen felhasználónév';
+        this.loading = false;
+        return;
       });
     }
   }

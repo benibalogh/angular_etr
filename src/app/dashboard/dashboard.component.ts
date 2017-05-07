@@ -1,18 +1,24 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { GivenNamePipe } from './../_pipes/given-name.pipe';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
 
-  username: string;
+  name: string;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
-    this.username = sessionStorage.getItem('name');
+    this.name = sessionStorage.getItem('name');
+    if (this.name === null) {
+      this.router.navigate(['/login']);
+    }
   }
 
   logout(): void {

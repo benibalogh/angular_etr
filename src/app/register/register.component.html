@@ -1,0 +1,27 @@
+<div class="container">
+  <form class="form-register" #registerForm="ngForm" (ngSubmit)="registerForm.form.valid && register()" novalidate>
+    <h2 class="form-register-heading">Regisztráció</h2>
+      <label for="inputName" class="sr-only">Név</label>
+      <input type="text" name="name" [(ngModel)]="user.name" id="inputName" class="form-control" placeholder="Név (Vezetéknév Keresztnév)" required autofocus>
+
+      <label for="inputEmail" class="sr-only">Email</label>
+      <input type="email" name="email" [(ngModel)]="user.email" id="inputEmail" class="form-control" placeholder="Email" required>
+
+      <label for="inputBirthdate" class="sr-only">Születési dátum</label>
+      <input type="date" name="birthdate" [(ngModel)]="user.birthdate" id="inputBirthdate" class="form-control" placeholder="Születési dátum"  min="1900-01-01" required>
+
+      <label class="radio" *ngFor="let gender of genders">
+        <input type="radio" name="gender" [(ngModel)]="user.gender" [value]="gender.value">
+        {{ gender.display }}
+      </label>
+
+      <label for="inputUsername" class="sr-only">Felhasználónév</label>
+      <input type="text" name="username" [(ngModel)]="user.username" id="inputUsername" class="form-control" placeholder="Felhasználónév" required>
+
+      <label for="inputPassword" class="sr-only">Jelszó</label>
+      <input type="password" name="password" [(ngModel)]="user.password" id="inputPassword" class="form-control" placeholder="Jelszó" required>
+
+      <button [disabled]="loading" class="btn btn-lg btn-primary btn-block"><i class="fa fa-user-plus" aria-hidden="true"></i> Regisztrálás</button>
+    <a [routerLink]="['/login']" class="btn btn-secondary btn-block">Mégse</a>
+  </form>
+</div>

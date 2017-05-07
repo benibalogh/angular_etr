@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+import { Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
@@ -14,6 +15,8 @@ export class GetDataService {
   private usersUrl = 'api/users';  // URL to web api
   private mycoursesUrl = 'api/mycourses';  // URL to web api
   private coursesUrl = 'api/courses';  // URL to web api
+
+  private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(private http: Http) { }
 
@@ -36,6 +39,29 @@ export class GetDataService {
                .toPromise()
                .then(res => res.json().data as Course[])
                .catch(this.handleError);
+  }
+
+  public createUser(user: User): Promise<User> {
+    return this.http
+      .post(this.usersUrl, JSON.stringify({
+                                username: user.username,
+                                password: user.password,
+                                email: user.email,
+                                name: user.name,
+                                birthdate: user.birthdate,
+                                gender: user.gender
+                              }), {headers: this.headers})
+      .toPromise()
+      .then(res => res.json().data as User)
+      .catch(this.handleError);
+  }
+
+  public getUser(id: number): Promise<User> {
+    const url = `${this.usersUrl}/${id}`;
+    return this.http.get(url)
+      .toPromise()
+      .then(res => res.json().data as User)
+      .catch(this.handleError);
   }
 
   private handleError(error: any): Promise<any> {

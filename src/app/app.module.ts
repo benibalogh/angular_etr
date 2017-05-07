@@ -14,9 +14,11 @@ import { LoginComponent } from './login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { MyCoursesComponent } from './my-courses/my-courses.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { GivenNamePipe } from './_pipes/given-name.pipe';
+import { RegisterComponent } from './register/register.component';
 
 const appRoutes: Routes = [
-  { path: 'login',      component: LoginComponent },
+  { path: 'login', component: LoginComponent },
   {
     path: 'dashboard',
     component: DashboardComponent,
@@ -28,6 +30,7 @@ const appRoutes: Routes = [
     ]
   },
   //{ path: 'courses',    component: MyCoursesComponent },
+  { path: 'register', component: RegisterComponent},
   {
     path: '',
     redirectTo: '/login',
@@ -42,7 +45,9 @@ const appRoutes: Routes = [
     LoginComponent,
     PageNotFoundComponent,
     MyCoursesComponent,
-    DashboardComponent
+    DashboardComponent,
+    GivenNamePipe,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
