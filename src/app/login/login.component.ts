@@ -17,13 +17,9 @@ export class LoginComponent implements OnInit {
     loggedIn: Boolean;
     valid: Boolean;
     debug: Boolean;
+    loading = false;
 
-    constructor(private http: Http, private getDataService: GetDataService, private router: Router) {
-      this.getDataService.getUsers()
-      .subscribe(
-        users => this.users = users
-      );
-    }
+    constructor(private http: Http, private getDataService: GetDataService, private router: Router) { }
 
   ngOnInit() {
     sessionStorage.removeItem('userid');
@@ -33,27 +29,31 @@ export class LoginComponent implements OnInit {
   login(form: NgForm) {
     this.valid = true;
     if (form.value.username === '' || form.value.password === '') {
-      this.errorMessage = 'üres valamelyik mező';
+      this.errorMessage = 'Üres valamelyik mező';
       this.valid = false;
-    }
-
-    if (this.valid) {
-      for (const u of this.users){
-        if (form.value.username === u.username) {
-          if (form.value.password === u.password) {
-            sessionStorage.setItem('userid', u.userid.toString());
-            sessionStorage.setItem('name', u.username);
-            this.router.navigate(['/dashboard']);
-          } else {
-            this.errorMessage = 'Nem jó a jelszó';
-            return;
-          }
-        }
-      }
-      this.errorMessage = 'Nincs ilyen felhasználónév';
       return;
     } else {
-      return;
+      this.loading = true;
+      this.getDataService.getUsers()
+      .then((users) => {
+            this.users = users;
+            for (const u of this.users) {
+              if (form.value.username === u.username) {
+                if (form.value.password === u.password) {
+                  sessionStorage.setItem('userid', u.userid.toString());
+                  sessionStorage.setItem('name', u.username);
+                  this.router.navigate(['/dashboard']);
+                } else {
+                  this.errorMessage = 'Nem jó a jelszó';
+                  this.loading = false;
+                  return;
+                }
+              }
+            }
+            this.errorMessage = 'Nincs ilyen felhasználónév';
+            this.loading = false;
+            return;
+      });
     }
   }
 }

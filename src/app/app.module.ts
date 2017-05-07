@@ -4,6 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 
+// Imports for loading & configuring the in-memory web api
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService } from './in-memory-data.service';
+
 import { AppComponent } from './app.component';
 import { GetDataService } from './getdata/get-data.service';
 import { LoginComponent } from './login/login.component';
@@ -44,11 +48,10 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     HttpModule,
+    InMemoryWebApiModule.forRoot(InMemoryDataService, { delay: 300 }),
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [
-    GetDataService
-  ],
+  providers: [GetDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

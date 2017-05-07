@@ -18,21 +18,24 @@ export class MyCoursesComponent implements OnInit {
   errorMessage: string;
   // subscribedCourses: Course[];
 
-  constructor(private router: Router, private getDataService: GetDataService) {
-    this.getDataService.getMyCourses()
-    .subscribe(
-      mycourses => this.mycourses = mycourses
-    );
+  constructor(private router: Router, private getDataService: GetDataService) { }
 
+  getMyCourses(): void {
+    this.getDataService.getMyCourses()
+        .then(mycourses => this.mycourses = mycourses);
+  }
+
+  getCourses(): void {
     this.getDataService.getCourses()
-    .subscribe(
-      courses => this.courses = courses
-    );
+        .then(courses => this.courses = courses);
+  }
+
+  ngOnInit() {
+    this.getMyCourses();
+    this.getCourses();
 
     this.showCourses();
   }
-
-  ngOnInit() { }
 
   showCourses() {
     if (sessionStorage.getItem('name') === null) {
