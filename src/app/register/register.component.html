@@ -1,14 +1,23 @@
 <div class="container">
   <form class="form-register" #registerForm="ngForm" (ngSubmit)="registerForm.form.valid && register()" novalidate>
-    <h2 class="form-register-heading">Regisztráció</h2>
+    <h3 class="form-register-heading">Hallgatói regisztráció</h3>
+      <div *ngIf="errorMessage" class="form-control-feedback">
+        <span class="text-danger">
+          <i class="fa fa-close" aria-hidden="true"></i> {{ errorMessage }}
+        </span>
+      </div>
+
       <label for="inputName" class="sr-only">Név</label>
-      <input type="text" name="name" [(ngModel)]="user.name" id="inputName" class="form-control" placeholder="Név (Vezetéknév Keresztnév)" required autofocus>
+      <input type="text" name="name" [(ngModel)]="user.name" id="inputName" class="form-control" placeholder="Név (Vezetéknév Keresztnév)" #name="ngModel" [ngClass]="{ 'has-error': registerForm.submitted && !name.valid }" required autofocus>
+      <div *ngIf="registerForm.submitted && !name.valid" class="help-block">Kötelező nevet megadni!</div>
 
       <label for="inputEmail" class="sr-only">Email</label>
-      <input type="email" name="email" [(ngModel)]="user.email" id="inputEmail" class="form-control" placeholder="Email" required>
+      <input type="email" name="email" [(ngModel)]="user.email" id="inputEmail" class="form-control" placeholder="Email" #email="ngModel" [ngClass]="{ 'has-error': registerForm.submitted && !email.valid }" required>
+      <div *ngIf="registerForm.submitted && !email.valid" class="help-block">Kötelező emailt megadni!</div>
 
       <label for="inputBirthdate" class="sr-only">Születési dátum</label>
-      <input type="date" name="birthdate" [(ngModel)]="user.birthdate" id="inputBirthdate" class="form-control" placeholder="Születési dátum"  min="1900-01-01" required>
+      <input type="date" name="birthdate" [(ngModel)]="user.birthdate" id="inputBirthdate" class="form-control" placeholder="Születési dátum" min="1900-01-01" pattern="[0-9]{4}.(0[1-9]|1[012]).(0[1-9]|1[0-9]|2[0-9]|3[01])|(0[1-9]|1[0-9]|2[0-9]|3[01]).(0[1-9]|1[012]).[0-9]{4}" #birthdate="ngModel" [ngClass]="{ 'has-error': registerForm.submitted && !birthdate.valid }" required>
+      <div *ngIf="registerForm.submitted && !birthdate.valid" class="help-block">Kötelező születési dátumot megadni!</div>
 
       <label class="radio" *ngFor="let gender of genders">
         <input type="radio" name="gender" [(ngModel)]="user.gender" [value]="gender.value">
@@ -16,10 +25,12 @@
       </label>
 
       <label for="inputUsername" class="sr-only">Felhasználónév</label>
-      <input type="text" name="username" [(ngModel)]="user.username" id="inputUsername" class="form-control" placeholder="Felhasználónév" required>
+      <input type="text" name="username" [(ngModel)]="user.username" id="inputUsername" class="form-control" placeholder="Felhasználónév" #username="ngModel" [ngClass]="{ 'has-error': registerForm.submitted && !username.valid }" required>
+      <div *ngIf="registerForm.submitted && !username.valid" class="help-block">Kötelező felhasználónevet megadni!</div>
 
       <label for="inputPassword" class="sr-only">Jelszó</label>
-      <input type="password" name="password" [(ngModel)]="user.password" id="inputPassword" class="form-control" placeholder="Jelszó" required>
+      <input type="password" name="password" [(ngModel)]="user.password" id="inputPassword" class="form-control" placeholder="Jelszó" #password="ngModel" [ngClass]="{ 'has-error': registerForm.submitted && !password.valid }" required>
+      <div *ngIf="registerForm.submitted && !password.valid" class="help-block">Kötelező jelszót megadni!</div>
 
       <button [disabled]="loading" class="btn btn-lg btn-primary btn-block"><i class="fa fa-user-plus" aria-hidden="true"></i> Regisztrálás</button>
     <a [routerLink]="['/login']" class="btn btn-secondary btn-block">Mégse</a>

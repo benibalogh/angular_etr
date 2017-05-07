@@ -25,6 +25,9 @@
 }
 .form-register .form-control:focus {
   z-index: 2;
+  -moz-box-shadow:     inset 0px 0px 3px #000000;
+  -webkit-box-shadow:  inset 0px 0px 3px #000000;
+  box-shadow:          inset 0px 0px 3px #000000;
 }
 .form-register input[name="name"] {
   margin-bottom: -1px;
@@ -47,4 +50,13 @@
 .form-register .radio {
   margin-left: 10px;
   margin-top: 10px;
+}
+
+.form-register .help-block {
+  color: #aa0000;
+  margin-left: 10px;
+}
+
+.form-register .has-error {
+  border:1px solid #aa0000;
 }

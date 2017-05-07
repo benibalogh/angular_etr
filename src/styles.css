@@ -2,3 +2,7 @@
 body {
   background-color: #eee;
 }
+
+button {
+  cursor: pointer;
+}

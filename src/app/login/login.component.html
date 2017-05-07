@@ -13,7 +13,14 @@
 
     <label for="inputPassword" class="sr-only">Jelszó</label>
     <input type="password" name="password" ngModel id="inputPassword" class="form-control" placeholder="Jelszó" required>
-
+<!--
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" name="isTutor" [(ngModel)]="user.isTutor">
+          Oktatói bejelentkezés
+      </label>
+    </div>
+-->
     <button [disabled]="loading" class="btn btn-lg btn-primary btn-block"><i class="fa fa-sign-in" aria-hidden="true"></i> Belépés</button>
     <a [routerLink]="['/register']" class="btn btn-secondary btn-block">Regisztráció</a>
   </form>

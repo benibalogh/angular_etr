@@ -49,19 +49,59 @@ export class GetDataService {
                                 email: user.email,
                                 name: user.name,
                                 birthdate: user.birthdate,
-                                gender: user.gender
+                                gender: user.gender,
+                                isTutor: user.isTutor
                               }), {headers: this.headers})
       .toPromise()
       .then(res => res.json().data as User)
       .catch(this.handleError);
   }
 
-  public getUser(id: number): Promise<User> {
+  public getUserById(id: number): Promise<User> {
     const url = `${this.usersUrl}/${id}`;
     return this.http.get(url)
       .toPromise()
       .then(res => res.json().data as User)
       .catch(this.handleError);
+  }
+
+  public getUserByUsername(username: string): Promise<User> {
+    return new Promise<User>(
+      (resolve, reject) => {
+        this.getUsers()
+          .then(users => {
+            users.forEach(user => {
+              if (user.username === username) {
+                resolve(user);
+              }
+            });
+            resolve(null);
+          });
+      });
+  }
+
+  public registerUser(user: User): Promise<User> {
+    return new Promise<User>(
+      (resolve, reject) => {
+        this.getUserByUsername(user.username)
+          .then((res) => {
+            if (res === null) {
+              resolve(this.createUser(user));
+            } else {
+              resolve(null);
+            }
+          });
+      });
+/*
+    this.getUserByUsername(user.username)
+    .then((res) => {
+      if (res === null) {
+        this.createUser(user);
+      } else {
+        console.log('user is already registered!');
+      }
+    });
+*/
   }
 
   private handleError(error: any): Promise<any> {

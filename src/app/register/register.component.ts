@@ -12,6 +12,7 @@ import { User } from './../interfaces/user';
 export class RegisterComponent implements OnInit {
 
   public user: User;
+  errorMessage: string;
   loading = false;
 
   public genders = [
@@ -29,15 +30,22 @@ export class RegisterComponent implements OnInit {
       birthdate: new Date(),
       gender: this.genders[1].value,
       username: '',
-      password: ''
+      password: '',
+      isTutor: false
     };
   }
 
   register(): void {
     this.loading = true;
-    this.getDataService.createUser(this.user)
-      .then(() => {
-        this.router.navigate(['/login']);
+    this.getDataService.registerUser(this.user)
+      .then((res) => {
+        if (res !== null) {
+          this.router.navigate(['/login']);
+        } else {
+          this.errorMessage = 'Létező felhasználónév, válassz másikat!';
+          this.loading = false;
+          //console.log('Already registered!');
+        }
         // this.getDataService.getUser()
       });
   }
