@@ -14,6 +14,7 @@ export class RegisterComponent implements OnInit {
   public user: User;
   errorMessage: string;
   loading = false;
+  displayDatePlaceholder = true;
 
   public genders = [
     { value: 'N', display: 'Nő' },
@@ -28,10 +29,11 @@ export class RegisterComponent implements OnInit {
       name: '',
       email: '',
       birthdate: new Date(),
-      gender: this.genders[1].value,
+      gender: this.genders[1].display,
       username: '',
       password: '',
-      isTutor: false
+      isTutor: false,
+      payments: []
     };
   }
 
@@ -48,6 +50,10 @@ export class RegisterComponent implements OnInit {
         }
         // this.getDataService.getUser()
       });
+  }
+
+  removeDatePlaceholder(): void {
+    this.displayDatePlaceholder = false;
   }
 
 }

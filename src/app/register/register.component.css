@@ -60,3 +60,13 @@
 .form-register .has-error {
   border:1px solid #aa0000;
 }
+
+.placeholder::before{
+    width:100%;
+    content:attr(placeholder);
+}
+
+.placeholder:hover::before{
+    width:0%;
+    content:"";
+}
