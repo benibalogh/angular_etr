@@ -78,13 +78,22 @@ export class GetDataService {
       (resolve, reject) => {
         this.getUserByUsername(user.username)
           .then((res) => {
-            if (!Object.keys(res).length)  {
+            if (!Object.keys(res).length)  {  // check for empty res -> no user with the same username exists
               resolve(this.createUser(user));
             } else {
               resolve(null);
             }
           });
       });
+  }
+
+  public updateUser(user: User): Promise<User> {
+    const url = `${this.usersUrl}/${user.id}`;
+    return this.http
+      .put(url, JSON.stringify(user), {headers: this.headers})
+      .toPromise()
+      .then( () => user)
+      .catch(this.handleError);
   }
 
   private handleError(error: any): Promise<any> {

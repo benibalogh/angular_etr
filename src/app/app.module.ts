@@ -16,6 +16,7 @@ import { MyCoursesComponent } from './my-courses/my-courses.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { GivenNamePipe } from './_pipes/given-name.pipe';
 import { RegisterComponent } from './register/register.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -26,7 +27,7 @@ const appRoutes: Routes = [
       { path: 'courses', component: MyCoursesComponent },
       { path: 'finances', component: MyCoursesComponent },  // placeholder component
       { path: 'exams', component: MyCoursesComponent },  // placeholder component
-      { path: 'profile', component: MyCoursesComponent },  // placeholder component
+      { path: 'profile', component: ProfileComponent },  // placeholder component
     ]
   },
   //{ path: 'courses',    component: MyCoursesComponent },
@@ -47,7 +48,8 @@ const appRoutes: Routes = [
     MyCoursesComponent,
     DashboardComponent,
     GivenNamePipe,
-    RegisterComponent
+    RegisterComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
