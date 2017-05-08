@@ -65,19 +65,11 @@ export class GetDataService {
       .catch(this.handleError);
   }
 
-  public getUserByUsername(username: string): Promise<User> {
-    return new Promise<User>(
-      (resolve, reject) => {
-        this.getUsers()
-          .then(users => {
-            users.forEach(user => {
-              if (user.username === username) {
-                resolve(user);
-              }
-            });
-            resolve(null);
-          });
-      });
+  public getUserByUsername(username: string): Promise<any> {
+    return this.http.get(url)
+      .toPromise()
+      .then(res => res.json().data)
+      .catch(this.handleError);
   }
 
   public registerUser(user: User): Promise<User> {
@@ -85,23 +77,13 @@ export class GetDataService {
       (resolve, reject) => {
         this.getUserByUsername(user.username)
           .then((res) => {
-            if (res === null) {
+            if (!Object.keys(res).length)  {
               resolve(this.createUser(user));
             } else {
               resolve(null);
             }
           });
       });
-/*
-    this.getUserByUsername(user.username)
-    .then((res) => {
-      if (res === null) {
-        this.createUser(user);
-      } else {
-        console.log('user is already registered!');
-      }
-    });
-*/
   }
 
   private handleError(error: any): Promise<any> {
