@@ -66,6 +66,7 @@ export class GetDataService {
   }
 
   public getUserByUsername(username: string): Promise<any> {
+    const url = `${this.usersUrl}?username=^${username}$`;
     return this.http.get(url)
       .toPromise()
       .then(res => res.json().data)
