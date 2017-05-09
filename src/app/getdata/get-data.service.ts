@@ -4,16 +4,13 @@ import { Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
-// import 'rxjs/add/operator/delay';
 import { User } from '../interfaces/user';
 import { Course } from '../interfaces/course';
-import { MyCourse } from '../interfaces/mycourse';
 
 @Injectable()
 export class GetDataService {
 
   private usersUrl = 'api/users';  // URL to web api
-  private mycoursesUrl = 'api/mycourses';  // URL to web api
   private coursesUrl = 'api/courses';  // URL to web api
 
   private headers = new Headers({'Content-Type': 'application/json'});
@@ -27,18 +24,26 @@ export class GetDataService {
                .catch(this.handleError);
   }
 
-  public getMyCourses(): Promise<MyCourse[]> {
-     return this.http.get(this.mycoursesUrl)
-                .toPromise()
-                .then(res => res.json().data as MyCourse[])
-                .catch(this.handleError);
-  }
-
   public getCourses(): Promise<Course[]> {
     return this.http.get(this.coursesUrl)
                .toPromise()
                .then(res => res.json().data as Course[])
                .catch(this.handleError);
+  }
+
+  public dropCourse(userid: number, courseid: number): Promise<void> {
+    const url = `${this.usersUrl}/${userid}`;
+    return this.http.get(url)
+      .toPromise()
+      .then(res => {
+        let user: User = res.json().data as User;
+        let idx = user.courseids.indexOf(courseid);
+        if (idx > -1) {
+          user.courseids.splice(idx, 1);
+        }
+
+        this.http.post(url, user).toPromise();
+      });
   }
 
   public createUser(user: User): Promise<User> {

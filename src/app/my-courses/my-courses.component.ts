@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { GetDataService } from '../getdata/get-data.service';
 import { Course } from '../interfaces/course';
-import { MyCourse } from '../interfaces/mycourse';
+import { User } from '../interfaces/user';
 
 @Component({
   selector: 'app-my-courses',
@@ -11,50 +11,46 @@ import { MyCourse } from '../interfaces/mycourse';
 })
 
 export class MyCoursesComponent implements OnInit {
-  mycourses: MyCourse[];
-  courses: Course[];
-  username: string;
+  user: User;
   userid: number;
+  username: string;
   errorMessage: string;
-  // subscribedCourses: Course[];
+  subscribedCourses: Course[] = [];
 
   constructor(private router: Router, private getDataService: GetDataService) { }
 
-  getMyCourses(): void {
-    this.getDataService.getMyCourses()
-        .then(mycourses => this.mycourses = mycourses);
-  }
-
-  getCourses(): void {
-    this.getDataService.getCourses()
-        .then(courses => this.courses = courses);
-  }
-
   ngOnInit() {
-    this.getMyCourses();
-    this.getCourses();
-
-    this.showCourses();
-  }
-
-  showCourses() {
     if (sessionStorage.getItem('name') === null) {
       this.router.navigate(['/login']);
     } else {
       this.username = sessionStorage.getItem('name');
       this.userid = parseInt(sessionStorage.getItem('userid'), 10);
-    }
-    // for(var u of this.courses){}
 
+      this.getUserAndCourses();
+    }
   }
 
-/*
-    this.errorMessage = this.mycourses.length.toString();
+  getUserAndCourses(): void {
+    this.getDataService.getUserById(this.userid).then(user => {
+      this.user = user;
 
-for(var mc of this.mycourses){
-      if(mc.userid == this.userid){
-        this.subscribedCourses = mc.courses;
+      this.getDataService.getCourses().then(courses => {
+        for (let c = 0; c < courses.length; c++) {
+          if (this.user.courseids.indexOf(courses[c].courseid) > -1) {
+            this.subscribedCourses.push(courses[c]);
+          }
+        }
+      });
+    });
+  }
+
+  dropCourse(course: Course): void {
+    this.getDataService.dropCourse(this.userid, course.courseid).then(() => {
+      let idx = this.subscribedCourses.indexOf(course);
+      if (idx > -1) {
+        this.subscribedCourses.splice(idx, 1);
       }
-    }
-*/
+    });
+  }
+
 }
