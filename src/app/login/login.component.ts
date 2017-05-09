@@ -22,8 +22,9 @@ export class LoginComponent implements OnInit {
     constructor(private http: Http, private getDataService: GetDataService, private router: Router) { }
 
   ngOnInit() {
-    sessionStorage.removeItem('userid');
-    sessionStorage.removeItem('name');
+    if (sessionStorage.getItem('name') !== null) {
+      this.router.navigate(['/dashboard']);
+    }
   }
 
   login(form: NgForm) {

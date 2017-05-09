@@ -23,8 +23,6 @@ export class DashboardComponent implements OnInit {
 
   logout(): void {
     sessionStorage.clear();
-    // sessionStorage.removeItem('userid');
-    // sessionStorage.removeItem('name');
   }
 
 }

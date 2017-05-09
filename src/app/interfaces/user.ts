@@ -9,4 +9,5 @@ export interface User {
     birthdate: Date;
     gender: string;
     isTutor: boolean;
+    payments: object[];
 }
