@@ -1,27 +1,23 @@
 <div id="welcome" class="content">
 
   <div class="content-header">
-    Kurzusaim
+    Kurzusfelvétel
   </div>
 
-  <div id="new-course">
-    <button routerLink="../courses" class="btn btn-primary"><i class="fa fa-plus"></i> Új kurzus felvétele</button>
-  </div>
-
-  <div id="courses" class="t-table" *ngIf="subscribedCourses.length > 0; else nulldiv">
+  <div id="courses" class="t-table" *ngIf="courses.length > 0">
     <div class="t-header">
       <div class="t-cell">Kurzus neve</div>
       <div class="t-cell credit">Kredit</div>
       <div class="t-cell teacher">Oktató</div>
       <div class="t-cell teacher">Műveletek</div>
     </div>
-    <div class="t-row" *ngFor="let course of subscribedCourses">
+    <div class="t-row" *ngFor="let course of courses">
       <div class="t-cell">{{ course.name }}</div>
       <div class="t-cell credit">{{ course.credits }}</div>
       <div class="t-cell teacher">{{ course.teacher }}</div>
-      <a class="t-cell" href="javascript:void(0)" (click)="dropCourse(course)">Kurzus leadása</a>
+      <div class="t-cell" *ngIf="subscribedCourses.indexOf(course) > -1">Ezt a kurzust már felvetted</div>
+      <a class="t-cell" href="javascript:void(0)" *ngIf="subscribedCourses.indexOf(course) == -1"
+        (click)="takeCourse(course)">Kurzus felvétele</a>
     </div>
   </div>
-
-  <template #nulldiv>Még nincs felvéve kurzusod!</template>
 </div>

@@ -31,6 +31,20 @@ export class GetDataService {
                .catch(this.handleError);
   }
 
+  public takeCourse(userid: number, courseid: number): Promise<void> {
+    const url = `${this.usersUrl}/${userid}`;
+    return this.http.get(url)
+      .toPromise()
+      .then(res => {
+        let user: User = res.json().data as User;
+        let idx = user.courseids.indexOf(courseid);
+        if (idx == -1) {
+          user.courseids.push(courseid);
+          this.http.post(url, user).toPromise();
+        }
+      });
+  }
+
   public dropCourse(userid: number, courseid: number): Promise<void> {
     const url = `${this.usersUrl}/${userid}`;
     return this.http.get(url)

@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { GetDataService } from './getdata/get-data.service';
 import { LoginComponent } from './login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { CoursesComponent } from './courses/courses.component';
 import { MyCoursesComponent } from './my-courses/my-courses.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { GivenNamePipe } from './_pipes/given-name.pipe';
@@ -24,13 +25,13 @@ const appRoutes: Routes = [
     path: 'dashboard',
     component: DashboardComponent,
     children: [
-      { path: 'courses', component: MyCoursesComponent },
+      { path: 'my-courses', component: MyCoursesComponent },
+      { path: 'courses', component: CoursesComponent },
       { path: 'finances', component: MyCoursesComponent },  // placeholder component
       { path: 'exams', component: MyCoursesComponent },  // placeholder component
-      { path: 'profile', component: ProfileComponent },  // placeholder component
+      { path: 'profile', component: ProfileComponent }
     ]
   },
-  //{ path: 'courses',    component: MyCoursesComponent },
   { path: 'register', component: RegisterComponent},
   {
     path: '',
@@ -45,6 +46,7 @@ const appRoutes: Routes = [
     AppComponent,
     LoginComponent,
     PageNotFoundComponent,
+    CoursesComponent,
     MyCoursesComponent,
     DashboardComponent,
     GivenNamePipe,
