@@ -2,6 +2,10 @@
   padding: 5px 10px;
 }
 
+#exams .t-cell.center {
+  text-align: center;
+}
+
 #exams .t-row.taken {
   background: #ACA;
 }

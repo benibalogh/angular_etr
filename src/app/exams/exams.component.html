@@ -19,7 +19,7 @@
         <div class="t-cell">{{ i === 0 ? course.name : '' }}</div>
         <div class="t-cell">{{ exam.date | date: 'yyyy. MM. dd. HH:mm' }}</div>
         <div class="t-cell">{{ exam.classRoom }}</div>
-        <div class="t-cell">{{ exam.participants.length}} / {{ exam.classRoom }}</div>
+        <div class="t-cell center">{{ exam.participants.length }} / {{ exam.maxSize }}</div>
 
         <a class="t-cell" href="javascript:void(0)" (click)="takeExam(course, exam)"
           *ngIf="!isSubscribedToExam(course, exam) && !isSubscribedToAnyExamForCourse(course)">Jelentkezés</a>
