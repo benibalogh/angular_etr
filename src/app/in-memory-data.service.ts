@@ -12,7 +12,8 @@ export class InMemoryDataService implements InMemoryDbService {
         birthdate: new Date(2017, 4, 6),
         gender: 'Nő',
         isTutor: true,
-        courseids: [1, 2, 3]
+        courseids: [1, 2, 3],
+        exams: []
       },
       {
         id: 2,
@@ -23,7 +24,8 @@ export class InMemoryDataService implements InMemoryDbService {
         birthdate: new Date(1990, 0, 2),
         gender: 'Nő',
         isTutor: false,
-        courseids: [2, 4, 1]
+        courseids: [2, 4, 1],
+        exams: []
       },
       {
         id: 3,
@@ -34,7 +36,8 @@ export class InMemoryDataService implements InMemoryDbService {
         birthdate: new Date(1947, 10, 10),
         gender: 'Férfi',
         isTutor: false,
-        courseids: []
+        courseids: [],
+        exams: []
       },
       {
         id: 4,
@@ -45,34 +48,169 @@ export class InMemoryDataService implements InMemoryDbService {
         birthdate: new Date(2000, 2, 21),
         gender: 'Férfi',
         isTutor: false,
-        courseids: [3, 4]
+        courseids: [3, 4],
+        exams: []
       }
     ];
 
     let courses = [
       {
         courseid: 1,
-        name: 'progalap',
+        name: 'Programozás Alapjai',
         teacher: 'Pofá Zoltán',
-        credits: 5
+        credits: 5,
+        exams: [
+          {
+            courseExamId: 1,
+            maxSize: 20,
+            participants: [],
+            classRoom: 'CX-502B',
+            date: new Date(2017, 6, 7, 8, 0)
+          },
+          {
+            courseExamId: 2,
+            maxSize: 50,
+            participants: [],
+            classRoom: 'CX-501A',
+            date: new Date(2017, 6, 7, 14, 30)
+          },
+          {
+            courseExamId: 3,
+            maxSize: 20,
+            participants: [],
+            classRoom: 'CX-502B',
+            date: new Date(2017, 6, 14, 8, 0)
+          },
+          {
+            courseExamId: 4,
+            maxSize: 50,
+            participants: [],
+            classRoom: 'CX-501A',
+            date: new Date(2017, 6, 14, 14, 30)
+          },
+          {
+            courseExamId: 5,
+            maxSize: 20,
+            participants: [],
+            classRoom: 'CX-502B',
+            date: new Date(2017, 6, 21, 8, 0)
+          },
+          {
+            courseExamId: 6,
+            maxSize: 50,
+            participants: [],
+            classRoom: 'CX-501A',
+            date: new Date(2017, 6, 21, 14, 30)
+          }
+        ]
       },
       {
         courseid: 2,
         name: 'Angular',
         teacher: 'Kelep Elek',
-        credits: 2
+        credits: 2,
+        exams: [
+          {
+            courseExamId: 1,
+            maxSize: 25,
+            participants: [],
+            classRoom: 'CX-504',
+            date: new Date(2017, 6, 6, 12, 0)
+          },
+          {
+            courseExamId: 2,
+            maxSize: 25,
+            participants: [],
+            classRoom: 'CX-504',
+            date: new Date(2017, 6, 13, 12, 0)
+          },
+          {
+            courseExamId: 3,
+            maxSize: 25,
+            participants: [],
+            classRoom: 'CX-504',
+            date: new Date(2017, 6, 20, 12, 0)
+          }
+        ]
       },
       {
         courseid: 3,
         name: 'Formális nyelvek',
-        teacher: 'Égető napsugár',
-        credits: 3
+        teacher: 'Égető Napsugár',
+        credits: 3,
+        exams: [
+          {
+            courseExamId: 1,
+            maxSize: 10,
+            participants: [],
+            classRoom: 'CX-509',
+            date: new Date(2017, 6, 6, 12, 0)
+          },
+          {
+            courseExamId: 2,
+            maxSize: 10,
+            participants: [],
+            classRoom: 'CX-509',
+            date: new Date(2017, 6, 13, 12, 0)
+          },
+          {
+            courseExamId: 3,
+            maxSize: 10,
+            participants: [],
+            classRoom: 'CX-509',
+            date: new Date(2017, 6, 20, 12, 0)
+          }
+        ]
       },
       {
         courseid: 4,
-        name: 'Prog 1',
+        name: 'Programozás 1',
         teacher: 'Cserepes Virág',
-        credits: 4
+        credits: 4,
+        exams: [
+          {
+            courseExamId: 1,
+            maxSize: 20,
+            participants: [],
+            classRoom: 'CX-502B',
+            date: new Date(2017, 6, 8, 10, 0)
+          },
+          {
+            courseExamId: 2,
+            maxSize: 20,
+            participants: [],
+            classRoom: 'CX-502B',
+            date: new Date(2017, 6, 8, 12, 0)
+          },
+          {
+            courseExamId: 3,
+            maxSize: 20,
+            participants: [],
+            classRoom: 'CX-502B',
+            date: new Date(2017, 6, 15, 10, 0)
+          },
+          {
+            courseExamId: 4,
+            maxSize: 20,
+            participants: [],
+            classRoom: 'CX-502B',
+            date: new Date(2017, 6, 15, 12, 0)
+          },
+          {
+            courseExamId: 5,
+            maxSize: 20,
+            participants: [],
+            classRoom: 'CX-502B',
+            date: new Date(2017, 6, 22, 10, 0)
+          },
+          {
+            courseExamId: 6,
+            maxSize: 20,
+            participants: [],
+            classRoom: 'CX-502B',
+            date: new Date(2017, 6, 22, 12, 0)
+          }
+        ]
       }
     ];
 

@@ -9,7 +9,6 @@ import { User } from '../interfaces/user';
   templateUrl: './courses.component.html',
   styleUrls: ['./courses.component.css'],
 })
-
 export class CoursesComponent implements OnInit {
   user: User;
   userid: number;

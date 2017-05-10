@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { GetDataService } from './getdata/get-data.service';
 import { LoginComponent } from './login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { ExamsComponent } from './exams/exams.component';
 import { CoursesComponent } from './courses/courses.component';
 import { MyCoursesComponent } from './my-courses/my-courses.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -28,7 +29,7 @@ const appRoutes: Routes = [
       { path: 'my-courses', component: MyCoursesComponent },
       { path: 'courses', component: CoursesComponent },
       { path: 'finances', component: MyCoursesComponent },  // placeholder component
-      { path: 'exams', component: MyCoursesComponent },  // placeholder component
+      { path: 'exams', component: ExamsComponent },
       { path: 'profile', component: ProfileComponent }
     ]
   },
@@ -46,6 +47,7 @@ const appRoutes: Routes = [
     AppComponent,
     LoginComponent,
     PageNotFoundComponent,
+    ExamsComponent,
     CoursesComponent,
     MyCoursesComponent,
     DashboardComponent,

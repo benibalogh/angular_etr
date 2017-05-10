@@ -1,0 +1,15 @@
+#exams .t-cell {
+  padding: 5px 10px;
+}
+
+#exams .t-row.taken {
+  background: #ACA;
+}
+
+#exams .t-header .t-cell {
+  border-bottom: none;
+}
+
+#exams .t-row.first-row .t-cell {
+  border-top: 1px solid #AAA;
+}

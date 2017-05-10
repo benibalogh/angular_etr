@@ -1,4 +1,4 @@
-import { Course } from './course';
+import { CourseExam } from './course-exam';
 
 export interface User {
   id: number;
@@ -11,4 +11,5 @@ export interface User {
   isTutor: boolean;
   payments: object[];
   courseids: number[];
+  exams: CourseExam[];
 }
