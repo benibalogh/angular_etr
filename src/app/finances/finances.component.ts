@@ -1,22 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { GetDataService } from '../getdata/get-data.service';
-import { Course } from '../interfaces/course';
+import { Finance } from '../interfaces/finance';
 import { User } from '../interfaces/user';
 
 @Component({
-  selector: 'app-courses',
-  templateUrl: './courses.component.html',
-  styleUrls: ['./courses.component.css'],
+  selector: 'app-finances',
+  templateUrl: './finances.component.html',
+  styleUrls: ['./finances.component.css'],
 })
-
-export class CoursesComponent implements OnInit {
+export class FinancesComponent implements OnInit {
   user: User;
   userid: number;
   username: string;
   errorMessage: string;
-  courses: Course[] = [];
-  subscribedCourses: Course[] = [];
+  finances: Finance[] = [];
+  userFinances: Finance[] = [];
 
   constructor(private router: Router, private getDataService: GetDataService) { }
 
@@ -27,31 +26,29 @@ export class CoursesComponent implements OnInit {
       this.username = sessionStorage.getItem('name');
       this.userid = parseInt(sessionStorage.getItem('userid'), 10);
 
-      this.getUserAndCourses();
+      this.getUserAndFinances();
     }
   }
 
-  getUserAndCourses(): void {
+  getUserAndFinances(): void {
     this.getDataService.getUserById(this.userid).then(user => {
       this.user = user;
 
-      this.getDataService.getCourses().then(courses => {
-        this.courses = courses;
-
-        for (let c = 0; c < courses.length; c++) {
-          if (this.user.courseids.indexOf(courses[c].courseid) > -1) {
-            this.subscribedCourses.push(courses[c]);
+      this.getDataService.getFinances().then(finances => {
+        for (let f = 0; f < finances.length; f++) {
+          if (this.user.financeids.indexOf(finances[f].financeid) > -1) {
+            this.userFinances.push(finances[f]);
           }
         }
       });
     });
   }
 
-  takeCourse(course: Course): void {
-    this.getDataService.takeCourse(this.userid, course.courseid).then(() => {
+  /*payFinance(course: Course): void {
+    this.getDataService.payFinance(this.userid, finance.financeid).then(() => {
       this.router.navigate(['dashboard/my-courses']);
       this.subscribedCourses.push(course);
     });
-  }
+  }*/
 
 }

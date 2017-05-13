@@ -58,5 +58,49 @@
 				"credits": 4
 			}
 		]
+		"myfinances":[
+			{
+				"userid": 1,
+				"financeids": [1, 2, 3],
+				"status": [true, false, false]
+			},
+			{
+				"userid": 2,
+				"financeids": [3, 4],
+				"status": [false, false]
+			}
+			{
+				"userid": 3,
+				"financeids": [1, 4],
+				"status": [false, true]
+			}
+		]
+		"finances":[
+			{
+				"financeid": 1,
+				"name": "Móra Ferenc Kollégium kollégiumi díj",
+				"deadline": 2017-05-10,
+				"amount": 9360
+			},
+			{
+				"financeid": 2,
+				"name": "TTIK Tantárgy újrafelvételi díj",
+				"deadline": 2017-05-10,
+				"amount": 4000
+			},
+			{
+				"financeid": 3,
+				"name": "	TTIK Utóvizsga díj",
+				"deadline": 2017-05-10,
+				"amount": 7000
+			},
+			{
+				"financeid": 4,
+				"name": "Károlyi Mihály Kollégium kollégiumi díj",
+				"deadline": 2017-05-10,
+				"amount": 9560
+			}
+		]
+		
 	}
 }

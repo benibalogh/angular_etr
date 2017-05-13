@@ -11,5 +11,6 @@ export interface User {
   isTutor: boolean;
   payments: object[];
   courseids: number[];
+  financeids: number[];
   exams: CourseExam[];
 }

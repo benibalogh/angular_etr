@@ -1,0 +1,21 @@
+<div class="content">
+
+  <div class="content-header">
+    Pénzügyeim
+  </div>
+
+  <div id="finances" class="t-table" *ngIf="userFinances.length > 0">
+    <div class="t-header">
+      <div class="t-cell">Befizetés neve</div>
+      <div class="t-cell amount">Összeg</div>
+      <div class="t-cell deadline">Határidő</div>
+      <div class="t-cell status">Státusz</div>
+    </div>
+    <div class="t-row" *ngFor="let finance of userFinances">
+      <div class="t-cell">{{ finance.name }}</div>
+      <div class="t-cell amount">{{ finance.amount }}</div>
+      <div class="t-cell deadline">{{ finance.deadline }}</div>
+      <div class="t-cell" "status">{{ finance.status }}</div>
+    </div>
+  </div>
+</div>

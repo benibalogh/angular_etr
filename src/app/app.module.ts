@@ -14,6 +14,7 @@ import { LoginComponent } from './login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ExamsComponent } from './exams/exams.component';
 import { CoursesComponent } from './courses/courses.component';
+import { FinancesComponent } from './finances/finances.component';
 import { MyCoursesComponent } from './my-courses/my-courses.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { GivenNamePipe } from './_pipes/given-name.pipe';
@@ -49,6 +50,7 @@ const appRoutes: Routes = [
     PageNotFoundComponent,
     ExamsComponent,
     CoursesComponent,
+	FinancesComponent,
     MyCoursesComponent,
     DashboardComponent,
     GivenNamePipe,

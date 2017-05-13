@@ -1,0 +1,11 @@
+#courses .t-cell {
+  padding: 5px 10px;
+}
+
+#courses .t-cell.credit {
+  text-align: center;
+}
+
+#courses .t-cell.teacher {
+  text-align: left;
+}

@@ -6,12 +6,14 @@ import 'rxjs/add/operator/toPromise';
 import { User } from '../interfaces/user';
 import { Course } from '../interfaces/course';
 import { CourseExam } from '../interfaces/course-exam';
+import { Finance } from '../interfaces/finance';
 
 @Injectable()
 export class GetDataService {
 
   private usersUrl = 'api/users';  // URL to web api
   private coursesUrl = 'api/courses';  // URL to web api
+  private financesUrl = 'api/finances';  // URL to web api
 
   private headers = new Headers({'Content-Type': 'application/json'});
 
@@ -28,6 +30,13 @@ export class GetDataService {
     return this.http.get(this.coursesUrl)
                .toPromise()
                .then(res => res.json().data as Course[])
+               .catch(this.handleError);
+  }
+  
+  public getFinances(): Promise<Finance[]> {
+    return this.http.get(this.coursesUrl)
+               .toPromise()
+               .then(res => res.json().data as Finance[])
                .catch(this.handleError);
   }
 

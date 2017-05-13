@@ -35,6 +35,7 @@ export class RegisterComponent implements OnInit {
       isTutor: false,
       payments: [],
       courseids: [],
+	  financeids: [],
       exams: []
     };
   }

@@ -13,6 +13,7 @@ export class InMemoryDataService implements InMemoryDbService {
         gender: 'Nő',
         isTutor: true,
         courseids: [1, 2, 3],
+		financeids: [1, 2, 3],
         exams: []
       },
       {
@@ -25,6 +26,7 @@ export class InMemoryDataService implements InMemoryDbService {
         gender: 'Nő',
         isTutor: false,
         courseids: [2, 4, 1],
+		financeids: [3, 4],
         exams: []
       },
       {
@@ -37,6 +39,7 @@ export class InMemoryDataService implements InMemoryDbService {
         gender: 'Férfi',
         isTutor: false,
         courseids: [],
+		financeids: [1, 4],
         exams: []
       },
       {
@@ -49,6 +52,7 @@ export class InMemoryDataService implements InMemoryDbService {
         gender: 'Férfi',
         isTutor: false,
         courseids: [3, 4],
+		financeids: [],
         exams: []
       }
     ];
@@ -213,8 +217,36 @@ export class InMemoryDataService implements InMemoryDbService {
         ]
       }
     ];
+	
+	let finances = [
+		{
+			financeid: 1,
+			name: 'Móra Ferenc Kollégium kollégiumi díj',
+			deadline: new Date(2017, 5, 10),
+			amount: 9360
+		},
+		{
+			financeid: 2,
+			name: 'TTIK Tantárgy újrafelvételi díj',
+			deadline: new Date(2017, 6, 11),
+			amount: 4000
+		},
+		{
+			financeid: 3,
+			name: 'TTIK Utóvizsga díj',
+			deadline:new Date(2017, 6, 11),
+			amount: 7000
+		},
+		{
+			financeid: 4,
+			name: 'Károlyi Mihály Kollégium kollégiumi díj',
+			deadline: new Date(2017, 5, 11),
+			amount: 9560
+		}
+	];
+	
 
-    return {users, courses};
+    return {users, courses, finances};
   }
 
 }
