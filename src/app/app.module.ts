@@ -8,6 +8,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
 
+import { HighlightDirective } from './_directives/highlight.directive';
+
 import { AppComponent } from './app.component';
 import { GetDataService } from './getdata/get-data.service';
 import { LoginComponent } from './login/login.component';
@@ -46,11 +48,12 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
+    HighlightDirective,
     LoginComponent,
     PageNotFoundComponent,
     ExamsComponent,
     CoursesComponent,
-	FinancesComponent,
+    FinancesComponent,
     MyCoursesComponent,
     DashboardComponent,
     GivenNamePipe,
