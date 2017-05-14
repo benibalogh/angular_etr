@@ -69,9 +69,11 @@
         </tbody>
       </table>
 
+      <app-change-password [user]="user" (finishedSaving)="handlePasswordChanged()" *ngIf="isChangingPw"></app-change-password>
 
       <div class="card-block">
-        <button *ngIf="!isEditing" (click)="editClicked()" class="btn btn-outline-primary"><i class="fa fa-pencil" aria-hidden="true"></i> Szerkesztés</button>
+        <button *ngIf="!isEditing" (click)="editClicked()" [disabled]="isChangingPw" class="btn btn-outline-primary"><i class="fa fa-pencil" aria-hidden="true"></i> Szerkesztés</button>
+        <button *ngIf="!isEditing" (click)="changePassword()" class="btn btn-secondary"><i class="fa fa-key" aria-hidden="true"></i> Jelszó megváltoztatása</button>
         <button *ngIf="isEditing" (click)="saveClicked()" [disabled]="isSaving" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i> Mentés</button>
         <button *ngIf="isEditing" (click)="cancelClicked()" [disabled]="isSaving" class="btn btn-secondary"><i class="fa fa-ban" aria-hidden="true"></i> Mégse</button>
       </div>

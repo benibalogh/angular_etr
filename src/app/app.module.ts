@@ -19,6 +19,7 @@ import { MyCoursesComponent } from './my-courses/my-courses.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { GivenNamePipe } from './_pipes/given-name.pipe';
 import { ProfileComponent } from './profile/profile.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 const appRoutes: Routes = [
   {
@@ -52,7 +53,8 @@ const appRoutes: Routes = [
     MyCoursesComponent,
     DashboardComponent,
     GivenNamePipe,
-    ProfileComponent
+    ProfileComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,

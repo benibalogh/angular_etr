@@ -15,6 +15,7 @@ export class ProfileComponent implements OnInit {
   userBackup: User;
   isEditing = false;
   isSaving = false;
+  isChangingPw = false;
 
   public genders = [
     { value: 'N', display: 'Nő' },
@@ -50,6 +51,14 @@ export class ProfileComponent implements OnInit {
   cancelClicked(): void {
     this.isEditing = false;
     this.user = Object.assign({}, this.userBackup);  // roll back changes
+  }
+
+  changePassword(): void {
+    this.isChangingPw = !this.isChangingPw;
+  }
+
+  handlePasswordChanged(): void {
+    this.isChangingPw = false;
   }
 
 }
