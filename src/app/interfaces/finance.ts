@@ -3,5 +3,4 @@ export interface Finance {
   name: string;
   deadline: Date;
   amount: number;
-  fstatus: boolean;
 }

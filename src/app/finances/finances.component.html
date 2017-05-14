@@ -1,6 +1,6 @@
 <div class="content">
 
-  <div class="content-header">
+  <div class="content-header t-cell">
     Pénzügyeim
   </div>
 
@@ -17,9 +17,11 @@
       <div class="t-cell amount">{{ finance.amount }}</div>
       <div class="t-cell deadline">{{ finance.deadline | date: 'yyyy. MM. dd. ' }}</div>
 	  
-	  <ng-template #fizetve>Fizetve</ng-template>
+	  <ng-template #fizetve>
+		<div class="t-cell">Fizetve</div>
+	  </ng-template>
       <div class="t-cell status" *ngIf="user.financestatus[user.financeids.indexOf(finance.financeid)]==false; else fizetve">		
-		<a class="t-cell"  href="javascript:void(0)" (click)="payFinance(finance)">Fizetés</a>
+		<a href="javascript:void(0)" (click)="payFinance(finance)">Fizetés</a>
 	  </div>
 	  
     </div>

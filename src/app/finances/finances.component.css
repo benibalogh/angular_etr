@@ -1,5 +1,19 @@
+.content-header {
+	padding: 10px;
+}
+
+.t-header {
+	padding: 10px 0;
+}
+
+#finances .t-row {
+	margin-bottom: 20px;
+}
+
 #finances .t-cell {
   padding: 5px 10px;
+  display: inline-block;
+  width: 20%;
 }
 
 #finances .t-cell.amount {
