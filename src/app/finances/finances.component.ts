@@ -43,11 +43,13 @@ export class FinancesComponent implements OnInit {
     });
   }
 
-  /*payFinance(course: Course): void {
+  payFinance(finance: Finance): void {
     this.getDataService.payFinance(this.userid, finance.financeid).then(() => {
-      this.router.navigate(['dashboard/my-courses']);
-      this.subscribedCourses.push(course);
+      let idx = this.userFinances.indexOf(finance);
+      if (idx > -1) {
+        this.user.financestatus.splice(idx, 1, true);
+      }
     });
-  }*/
+  }
 
 }

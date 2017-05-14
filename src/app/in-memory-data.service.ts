@@ -14,6 +14,7 @@ export class InMemoryDataService implements InMemoryDbService {
         isTutor: true,
         courseids: [1, 2, 3],
 		financeids: [1, 2, 3],
+		financestatus: [true, false, false],
         exams: []
       },
       {
@@ -27,6 +28,7 @@ export class InMemoryDataService implements InMemoryDbService {
         isTutor: false,
         courseids: [2, 4, 1],
 		financeids: [3, 4],
+		financestatus: [false, false],
         exams: []
       },
       {
@@ -40,6 +42,7 @@ export class InMemoryDataService implements InMemoryDbService {
         isTutor: false,
         courseids: [],
 		financeids: [1, 4],
+		financestatus: [true, true],
         exams: []
       },
       {
@@ -53,6 +56,7 @@ export class InMemoryDataService implements InMemoryDbService {
         isTutor: false,
         courseids: [3, 4],
 		financeids: [],
+		financestatus: [],
         exams: []
       }
     ];
@@ -223,25 +227,29 @@ export class InMemoryDataService implements InMemoryDbService {
 			financeid: 1,
 			name: 'Móra Ferenc Kollégium kollégiumi díj',
 			deadline: new Date(2017, 5, 10),
-			amount: 9360
+			amount: 9360,
+			fstatus: false
 		},
 		{
 			financeid: 2,
 			name: 'TTIK Tantárgy újrafelvételi díj',
 			deadline: new Date(2017, 6, 11),
-			amount: 4000
+			amount: 4000,
+			fstatus: false
 		},
 		{
 			financeid: 3,
 			name: 'TTIK Utóvizsga díj',
 			deadline:new Date(2017, 6, 11),
-			amount: 7000
+			amount: 7000,
+			fstatus: false
 		},
 		{
 			financeid: 4,
 			name: 'Károlyi Mihály Kollégium kollégiumi díj',
 			deadline: new Date(2017, 5, 11),
-			amount: 9560
+			amount: 9560,
+			fstatus: false
 		}
 	];
 	

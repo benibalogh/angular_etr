@@ -12,5 +12,6 @@ export interface User {
   payments: object[];
   courseids: number[];
   financeids: number[];
+  financestatus: boolean[];
   exams: CourseExam[];
 }

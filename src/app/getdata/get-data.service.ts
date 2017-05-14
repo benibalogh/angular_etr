@@ -68,6 +68,21 @@ export class GetDataService {
         this.http.post(url, user).toPromise();
       });
   }
+  
+   public payFinance(userid: number, financeid: number): Promise<void> {
+    const url = `${this.usersUrl}/${userid}`;
+    return this.http.get(url)
+      .toPromise()
+      .then(res => {
+        let user: User = res.json().data as User;
+        let idx = user.financeids.indexOf(financeid);
+        if (idx > -1) {
+          user.financestatus.splice(idx, 1, true);
+        }
+
+        this.http.post(url, user).toPromise();
+      });
+  }
 
   public takeExam(userId: number, courseId: number, examId: number): Promise<User> {
     return new Promise<User>((resolve, reject) => {

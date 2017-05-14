@@ -10,12 +10,18 @@
       <div class="t-cell amount">Összeg</div>
       <div class="t-cell deadline">Határidő</div>
       <div class="t-cell status">Státusz</div>
+	 
     </div>
     <div class="t-row" *ngFor="let finance of userFinances">
       <div class="t-cell">{{ finance.name }}</div>
       <div class="t-cell amount">{{ finance.amount }}</div>
       <div class="t-cell deadline">{{ finance.deadline | date: 'yyyy. MM. dd. ' }}</div>
-      <div class="t-cell status"></div>
+	  
+	  <ng-template #fizetve>Fizetve</ng-template>
+      <div class="t-cell status" *ngIf="user.financestatus[user.financeids.indexOf(finance.financeid)]==false; else fizetve">		
+		<a class="t-cell"  href="javascript:void(0)" (click)="payFinance(finance)">Fizetés</a>
+	  </div>
+	  
     </div>
   </div>
   
