@@ -20,6 +20,7 @@ import { CoursesComponent } from './courses/courses.component';
 import { FinancesComponent } from './finances/finances.component';
 import { MyCoursesComponent } from './my-courses/my-courses.component';
 import { ClassroomsComponent } from './classrooms/classrooms.component';
+import { TeachersComponent } from './teachers/teachers.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { GivenNamePipe } from './_pipes/given-name.pipe';
 import { RegisterComponent } from './register/register.component';
@@ -36,6 +37,7 @@ const appRoutes: Routes = [
       { path: 'finances', component: FinancesComponent },
       { path: 'exams', component: ExamsComponent },
       { path: 'classrooms', component: ClassroomsComponent },
+      { path: 'teachers', component: TeachersComponent },
       { path: 'profile', component: ProfileComponent }
     ]
   },
@@ -59,6 +61,7 @@ const appRoutes: Routes = [
     FinancesComponent,
     MyCoursesComponent,
     ClassroomsComponent,
+    TeachersComponent,
     DashboardComponent,
     GivenNamePipe,
     RegisterComponent,

@@ -1,0 +1,15 @@
+<div class="content">
+
+  <div class="content-header">
+    Oktatók
+  </div>
+
+  <div id="courses" class="t-table">
+    <div class="t-header">
+      <div class="t-cell">Név</div>
+    </div>
+    <div class="t-row" *ngFor="let teacher of teachers">
+      <div class="t-cell" [@fadeInState]="animState">{{ teacher }}</div>
+    </div>
+  </div>
+</div>
