@@ -21,11 +21,11 @@
         <div class="t-cell">{{ exam.classRoom }}</div>
         <div class="t-cell center">{{ exam.participants.length }} / {{ exam.maxSize }}</div>
 
-        <a class="t-cell" href="javascript:void(0)" (click)="takeExam(course, exam)"
+        <a class="t-cell" href="javascript:void(0)" highlight (click)="takeExam(course, exam)"
           *ngIf="!isSubscribedToExam(course, exam) && !isSubscribedToAnyExamForCourse(course)">Jelentkezés</a>
-        <a class="t-cell" href="javascript:void(0)" (click)="dropExam(course, exam)"
+        <a class="t-cell" href="javascript:void(0)" highlight (click)="dropExam(course, exam)"
           *ngIf="isSubscribedToExam(course, exam)">Lejelentkezés</a>
-        <a class="t-cell" href="javascript:void(0)" (click)="changeExam(course, exam)"
+        <a class="t-cell" href="javascript:void(0)" highlight (click)="changeExam(course, exam)"
           *ngIf="!isSubscribedToExam(course, exam) && isSubscribedToAnyExamForCourse(course)">Átjelentkezés</a>
       <!-- </div> -->
       </div>

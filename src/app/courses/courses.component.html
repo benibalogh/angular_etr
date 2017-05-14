@@ -16,7 +16,7 @@
       <div class="t-cell credit">{{ course.credits }}</div>
       <div class="t-cell teacher">{{ course.teacher }}</div>
       <div class="t-cell" *ngIf="subscribedCourses.indexOf(course) > -1">Ezt a kurzust már felvetted</div>
-      <a class="t-cell" href="javascript:void(0)" *ngIf="subscribedCourses.indexOf(course) == -1"
+      <a class="t-cell" href="javascript:void(0)" highlight *ngIf="subscribedCourses.indexOf(course) == -1"
         (click)="takeCourse(course)">Kurzus felvétele</a>
     </div>
   </div>

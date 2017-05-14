@@ -21,7 +21,7 @@
   		    <div class="t-cell">Fizetve</div>
   	  </ng-template>
       <div class="t-cell status" *ngIf="user.financestatus[user.financeids.indexOf(finance.financeid)]==false; else fizetve">
-        <a href="javascript:void(0)" (click)="payFinance(finance)">Fizetés</a>
+        <a href="javascript:void(0)" highlight (click)="payFinance(finance)">Fizetés</a>
   	  </div>
   </div>
 
