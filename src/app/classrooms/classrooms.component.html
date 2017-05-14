@@ -11,9 +11,9 @@
       <div class="t-cell teacher">Cím</div>
     </div>
     <div class="t-row" *ngFor="let classroom of classrooms">
-      <div class="t-cell">{{ classroom.label }}</div>
-      <div class="t-cell">{{ classroom.size }}</div>
-      <div class="t-cell">
+      <div class="t-cell" [@fadeInState]="animState">{{ classroom.label }}</div>
+      <div class="t-cell" [@fadeInState]="animState">{{ classroom.size }}</div>
+      <div class="t-cell" [@fadeInState]="animState">
         <span>{{ classroom.address }}</span>
         <a class="" href="javascript:void(0)" highlight (click)="showOnMap(classroom.address)">
           (<i class="fa fa-map-marker"></i>&nbsp;Térkép)
