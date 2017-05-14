@@ -1,0 +1,24 @@
+<div class="content">
+
+  <div class="content-header">
+    Termek
+  </div>
+
+  <div id="courses" class="t-table">
+    <div class="t-header">
+      <div class="t-cell">Terem száma</div>
+      <div class="t-cell credit">Férőhelyek</div>
+      <div class="t-cell teacher">Cím</div>
+    </div>
+    <div class="t-row" *ngFor="let classroom of classrooms">
+      <div class="t-cell">{{ classroom.label }}</div>
+      <div class="t-cell">{{ classroom.size }}</div>
+      <div class="t-cell">
+        <span>{{ classroom.address }}</span>
+        <a class="" href="javascript:void(0)" highlight (click)="showOnMap(classroom.address)">
+          (<i class="fa fa-map-marker"></i>&nbsp;Térkép)
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

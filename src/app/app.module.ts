@@ -18,6 +18,7 @@ import { ExamsComponent } from './exams/exams.component';
 import { CoursesComponent } from './courses/courses.component';
 import { FinancesComponent } from './finances/finances.component';
 import { MyCoursesComponent } from './my-courses/my-courses.component';
+import { ClassroomsComponent } from './classrooms/classrooms.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { GivenNamePipe } from './_pipes/given-name.pipe';
 import { RegisterComponent } from './register/register.component';
@@ -31,8 +32,9 @@ const appRoutes: Routes = [
     children: [
       { path: 'my-courses', component: MyCoursesComponent },
       { path: 'courses', component: CoursesComponent },
-      { path: 'finances', component: FinancesComponent },  // placeholder component
+      { path: 'finances', component: FinancesComponent },
       { path: 'exams', component: ExamsComponent },
+      { path: 'classrooms', component: ClassroomsComponent },
       { path: 'profile', component: ProfileComponent }
     ]
   },
@@ -55,6 +57,7 @@ const appRoutes: Routes = [
     CoursesComponent,
     FinancesComponent,
     MyCoursesComponent,
+    ClassroomsComponent,
     DashboardComponent,
     GivenNamePipe,
     RegisterComponent,
