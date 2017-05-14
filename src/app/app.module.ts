@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 
+import { LoginModule } from './login.module';
+
 // Imports for loading & configuring the in-memory web api
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
@@ -13,7 +15,6 @@ import { HighlightDirective } from './_directives/highlight.directive';
 
 import { AppComponent } from './app.component';
 import { GetDataService } from './getdata/get-data.service';
-import { LoginComponent } from './login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ExamsComponent } from './exams/exams.component';
 import { CoursesComponent } from './courses/courses.component';
@@ -23,11 +24,9 @@ import { ClassroomsComponent } from './classrooms/classrooms.component';
 import { TeachersComponent } from './teachers/teachers.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { GivenNamePipe } from './_pipes/given-name.pipe';
-import { RegisterComponent } from './register/register.component';
 import { ProfileComponent } from './profile/profile.component';
 
 const appRoutes: Routes = [
-  { path: 'login', component: LoginComponent },
   {
     path: 'dashboard',
     component: DashboardComponent,
@@ -41,7 +40,6 @@ const appRoutes: Routes = [
       { path: 'profile', component: ProfileComponent }
     ]
   },
-  { path: 'register', component: RegisterComponent},
   {
     path: '',
     redirectTo: '/login',
@@ -54,7 +52,6 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     HighlightDirective,
-    LoginComponent,
     PageNotFoundComponent,
     ExamsComponent,
     CoursesComponent,
@@ -64,7 +61,6 @@ const appRoutes: Routes = [
     TeachersComponent,
     DashboardComponent,
     GivenNamePipe,
-    RegisterComponent,
     ProfileComponent
   ],
   imports: [
@@ -72,6 +68,7 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     FormsModule,
     HttpModule,
+    LoginModule,
     InMemoryWebApiModule.forRoot(InMemoryDataService, { delay: 300 }),
     RouterModule.forRoot(appRoutes)
   ],
