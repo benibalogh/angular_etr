@@ -1,11 +1,11 @@
-#courses .t-cell {
+#finances .t-cell {
   padding: 5px 10px;
 }
 
-#courses .t-cell.credit {
+#finances .t-cell.amount {
   text-align: center;
 }
 
-#courses .t-cell.teacher {
+#finances .t-cell.deadline {
   text-align: left;
 }

@@ -14,7 +14,6 @@ export class FinancesComponent implements OnInit {
   userid: number;
   username: string;
   errorMessage: string;
-  finances: Finance[] = [];
   userFinances: Finance[] = [];
 
   constructor(private router: Router, private getDataService: GetDataService) { }

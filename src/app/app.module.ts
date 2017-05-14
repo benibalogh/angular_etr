@@ -29,7 +29,7 @@ const appRoutes: Routes = [
     children: [
       { path: 'my-courses', component: MyCoursesComponent },
       { path: 'courses', component: CoursesComponent },
-      { path: 'finances', component: MyCoursesComponent },  // placeholder component
+      { path: 'finances', component: FinancesComponent },  // placeholder component
       { path: 'exams', component: ExamsComponent },
       { path: 'profile', component: ProfileComponent }
     ]

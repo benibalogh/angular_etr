@@ -34,7 +34,7 @@ export class GetDataService {
   }
   
   public getFinances(): Promise<Finance[]> {
-    return this.http.get(this.coursesUrl)
+    return this.http.get(this.financesUrl)
                .toPromise()
                .then(res => res.json().data as Finance[])
                .catch(this.handleError);
