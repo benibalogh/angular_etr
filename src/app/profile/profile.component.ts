@@ -14,15 +14,15 @@ import { NameService } from './../name.service';
     trigger('fadeInOut', [
       transition('void => *', [
         style({
-          transform: 'translateY(-10px)',
-          opacity: 0.0
+          transform: 'scale(0)',
+          opacity: 0.5
         }),
         animate('300ms ease-out')
       ]),
       transition('* => void', [
         animate('300ms ease-in', style({
-          opacity: 0.0,
-          transform: 'translateY(-10px)'
+          transform: 'scale(0)',
+          opacity: 0.5
         }))
       ])
     ])
@@ -62,6 +62,9 @@ export class ProfileComponent implements OnInit {
         });
     this.isSaving = true;
     this.errorMessage = null;
+
+    // update name dispalyed in dashboard
+    this._nameService.changeName(this.user.name);
   }
 
 
@@ -102,7 +105,7 @@ export class ProfileComponent implements OnInit {
 
   nameChanged(name: string): void {
     this.user.name = name;
-    this._nameService.changeName(name);
+    // this._nameService.changeName(name);  // canDeactivate should be used to avoid displaying incorrect name on navigation
   }
 
 }
