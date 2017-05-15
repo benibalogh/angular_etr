@@ -22,8 +22,14 @@ export class ChangePasswordComponent implements OnInit {
   ngOnInit() { }
 
   savePassword(): void {
-    if (this.pw1 !== undefined && this.pw2 !== undefined && this.pw1 === this.pw2) {
-      this.user.password = this.pw1.trim();
+    if (this.pw1 === undefined || this.pw2 === undefined) {
+      this.errorMessage = 'Ne hagyd ürsen az új jelszó mezőket!';
+    } else if (this.pw1.trim() === '' || this.pw2.trim() === '' ) {
+      this.errorMessage = 'A jelszó nem lehet whitespace karakter!';
+    } else if (this.pw1 !== this.pw2) {
+      this.errorMessage = 'A két jelszó nem egyezik meg!';
+    } else {
+      this.user.password = this.pw1;
       this.errorMessage = null;
       this.getDataService.updateUser(this.user)
         .then( () => {
@@ -31,8 +37,6 @@ export class ChangePasswordComponent implements OnInit {
           this.finishedSaving.emit();
         });
       this.isSaving = true;
-    } else {
-      this.errorMessage = 'A két jelszó nem egyezik meg!';
     }
   }
 
