@@ -10,16 +10,20 @@ import { GetDataService } from './../getdata/get-data.service';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
   animations: [
-    trigger('fadeInState', [
-      state('start', style({
-        opacity: 0.0,
-        transform: 'translateY(-10px)'
-      })),
-      state('end', style({
-        opacity: 1.0,
-        transform: 'translateY(0px)'
-      })),
-      transition('start => end', animate('500ms ease-out'))
+    trigger('fadeInOut', [
+      transition('void => *', [
+        style({
+          transform: 'translateY(-10px)',
+          opacity: 0.0
+        }),
+        animate('300ms ease-out')
+      ]),
+      transition('* => void', [
+        animate('300ms ease-in', style({
+          opacity: 0.0,
+          transform: 'translateY(-10px)'
+        }))
+      ])
     ])
   ]
 })
@@ -31,6 +35,7 @@ export class ProfileComponent implements OnInit {
   isSaving = false;
   isChangingPw = false;
   animState: string;
+  errorMessage: string;
 
   public genders = [
     { value: 'N', display: 'Nő' },
@@ -55,25 +60,30 @@ export class ProfileComponent implements OnInit {
 
   saveClicked(): void {
     // save to db
-    this.getDataService.updateUser(this.user)
-      .then( () => {
-        this.isEditing = false;
-        this.isSaving = false;
-      });
-    this.isSaving = true;
+    this.getDataService.getUserByUsername(this.user.username)
+        .then((res) => {
+          if (!Object.keys(res).length)  {  // check for empty res -> no user with the same username exists
+            this.getDataService.updateUser(this.user)
+              .then( () => {
+                this.isEditing = false;
+                this.isSaving = false;
+              });
+            this.isSaving = true;
+            this.errorMessage = null;
+          } else {
+            this.errorMessage = 'Foglalt felhasználónév. Válassz másikat!';
+          }
+        });
   }
 
   cancelClicked(): void {
     this.isEditing = false;
+    this.errorMessage = null;
     this.user = Object.assign({}, this.userBackup);  // roll back changes
   }
 
   changePassword(): void {
     this.isChangingPw = !this.isChangingPw;
-    this.animState = 'start';
-    setTimeout(() => {
-      this.animState = 'end';
-    }, 100);
   }
 
   handlePasswordChanged(): void {

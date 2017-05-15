@@ -30,14 +30,14 @@ const appRoutes: Routes = [
     children: [
       { path: 'my-courses', component: MyCoursesComponent },
       { path: 'courses', component: CoursesComponent },
-     { 
-		path: 'finances', 
-		component: FinancesComponent,
-		children: [
-			{ path: 'payments', component: PaymentsComponent },
-			{ path: 'scholarships', component: ScholarshipsComponent }
-		]
-	  }, 
+    {
+    path: 'finances',
+    component: FinancesComponent,
+    children: [
+      { path: 'payments', component: PaymentsComponent },
+      { path: 'scholarships', component: ScholarshipsComponent }
+    ]
+    },
       { path: 'exams', component: ExamsComponent },
       { path: 'static', loadChildren: './static.module#StaticModule' },
       { path: 'profile', component: ProfileComponent }
@@ -59,8 +59,8 @@ const appRoutes: Routes = [
     ExamsComponent,
     CoursesComponent,
     FinancesComponent,
-	PaymentsComponent,
-	ScholarshipsComponent,
+    PaymentsComponent,
+    ScholarshipsComponent,
     MyCoursesComponent,
     DashboardComponent,
     GivenNamePipe,
