@@ -36,7 +36,7 @@
           <tr>
             <td>Név:</td>
             <td>
-              <input [disabled]="isSaving" [(ngModel)]="user.name" id="inputName" class="form-control" required autofocus>
+              <input [disabled]="isSaving" [ngModel]="user.name" (ngModelChange)="nameChanged($event)" id="inputName" class="form-control" required autofocus>
             <td>
           </tr>
           <tr>

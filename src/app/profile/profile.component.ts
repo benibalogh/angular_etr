@@ -4,6 +4,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 
 import { User } from './../interfaces/user';
 import { GetDataService } from './../getdata/get-data.service';
+import { NameService } from './../name.service';
 
 @Component({
   selector: 'app-profile',
@@ -42,7 +43,7 @@ export class ProfileComponent implements OnInit {
     { value: 'F', display: 'Férfi' }
   ];
 
-  constructor(private router: Router, private getDataService: GetDataService) { }
+  constructor(private router: Router, private getDataService: GetDataService, private _nameService: NameService) { }
 
   ngOnInit() {
     this.getUser();
@@ -52,6 +53,17 @@ export class ProfileComponent implements OnInit {
     this.getDataService.getUserById(parseInt(sessionStorage.getItem('userid'), 10))
       .then( user => this.user = user);
   }
+
+  updateUser(): void {
+    this.getDataService.updateUser(this.user)
+        .then( () => {
+          this.isEditing = false;
+          this.isSaving = false;
+        });
+    this.isSaving = true;
+    this.errorMessage = null;
+  }
+
 
   editClicked(): void {
     this.isEditing = true;
@@ -63,14 +75,11 @@ export class ProfileComponent implements OnInit {
     this.getDataService.getUserByUsername(this.user.username)
         .then((res) => {
           if (!Object.keys(res).length)  {  // check for empty res -> no user with the same username exists
-            this.getDataService.updateUser(this.user)
-              .then( () => {
-                this.isEditing = false;
-                this.isSaving = false;
-              });
-            this.isSaving = true;
-            this.errorMessage = null;
+            this.updateUser();
+          } else if (res[0].username === this.userBackup.username) { // res is an array which includes at most one User
+            this.updateUser();
           } else {
+            console.log(res);
             this.errorMessage = 'Foglalt felhasználónév. Válassz másikat!';
           }
         });
@@ -80,6 +89,7 @@ export class ProfileComponent implements OnInit {
     this.isEditing = false;
     this.errorMessage = null;
     this.user = Object.assign({}, this.userBackup);  // roll back changes
+    this._nameService.changeName(this.userBackup.name);
   }
 
   changePassword(): void {
@@ -88,6 +98,11 @@ export class ProfileComponent implements OnInit {
 
   handlePasswordChanged(): void {
     this.isChangingPw = false;
+  }
+
+  nameChanged(name: string): void {
+    this.user.name = name;
+    this._nameService.changeName(name);
   }
 
 }

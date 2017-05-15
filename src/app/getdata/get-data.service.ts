@@ -34,14 +34,14 @@ export class GetDataService {
                .then(res => res.json().data as Course[])
                .catch(this.handleError);
   }
-  
+
    public getPayments(): Promise<Payment[]> {
     return this.http.get(this.paymentsUrl)
                .toPromise()
                .then(res => res.json().data as Payment[])
                .catch(this.handleError);
   }
-  
+
   public getScholarships(): Promise<Scholarship[]> {
     return this.http.get(this.scholarshipsUrl)
                .toPromise()
@@ -77,7 +77,7 @@ export class GetDataService {
         this.http.post(url, user).toPromise();
       });
   }
-  
+
    public payIt(userid: number, paymentid: number): Promise<void> {
     const url = `${this.usersUrl}/${userid}`;
     return this.http.get(url)

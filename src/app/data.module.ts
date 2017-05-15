@@ -5,11 +5,12 @@ import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
 
 import { GetDataService } from './getdata/get-data.service';
+import { NameService } from './name.service';
 
 @NgModule({
   imports: [
     InMemoryWebApiModule.forRoot(InMemoryDataService, { delay: 300 }),
   ],
-  providers: [ GetDataService ]
+  providers: [ GetDataService, NameService ]
 })
 export class DataModule { }

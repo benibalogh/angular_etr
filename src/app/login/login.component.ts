@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
             if (form.value.password === u.password) {
               sessionStorage.setItem('userid', u.id.toString());
               sessionStorage.setItem('name', u.name);
-              this.router.navigate(['/dashboard']);
+              this.router.navigate(['/dashboard/my-courses']);
             } else {
               this.errorMessage = 'Nem jó a jelszó';
               this.loading = false;
