@@ -225,34 +225,34 @@ export class InMemoryDataService implements InMemoryDbService {
         ]
       }
     ];
-	
-	let finances = [
+
+	let payments = [
 		{
-			financeid: 1,
+			paymentid: 1,
 			name: 'Móra Ferenc Kollégium kollégiumi díj',
 			deadline: new Date(2017, 5, 10),
 			amount: 9360
 		},
 		{
-			financeid: 2,
+			paymentid: 2,
 			name: 'TTIK Tantárgy újrafelvételi díj',
 			deadline: new Date(2017, 6, 11),
 			amount: 4000
 		},
 		{
-			financeid: 3,
+			paymentid: 3,
 			name: 'TTIK Utóvizsga díj',
 			deadline: new Date(2017, 6, 11),
 			amount: 7000
 		},
 		{
-			financeid: 4,
+			paymentid: 4,
 			name: 'Károlyi Mihály Kollégium kollégiumi díj',
 			deadline: new Date(2017, 5, 11),
 			amount: 9560
 		}
 	];
-	
+
 	let scholarships = [
 		{
 			scholarshipid: 1,
@@ -279,9 +279,9 @@ export class InMemoryDataService implements InMemoryDbService {
 			amount: 15000
 		}
 	];
-	
 
-    return {users, courses, scholarships};
+
+    return {users, courses, payments, scholarships};
   }
 
 }
