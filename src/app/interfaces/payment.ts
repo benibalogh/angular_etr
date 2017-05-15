@@ -1,5 +1,5 @@
-export interface Finance {
-  financeid: number;
+export interface Payment {
+  paymentid: number;
   name: string;
   deadline: Date;
   amount: number;

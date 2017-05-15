@@ -2,7 +2,7 @@ import { InMemoryDbService } from 'angular-in-memory-web-api';
 
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
-    let users = [
+   let users = [
       {
         id: 1,
         username: 'admin',
@@ -13,8 +13,9 @@ export class InMemoryDataService implements InMemoryDbService {
         gender: 'Nő',
         isTutor: true,
         courseids: [1, 2, 3],
-		financeids: [1, 2, 3],
-		financestatus: [true, false, false],
+		paymentids: [1, 2, 3],
+		paymentstatus: [true, false, false],
+		scholarshipids: [1, 2, 3, 4],
         exams: []
       },
       {
@@ -27,8 +28,9 @@ export class InMemoryDataService implements InMemoryDbService {
         gender: 'Nő',
         isTutor: false,
         courseids: [2, 4, 1],
-		financeids: [3, 4],
-		financestatus: [false, false],
+		paymentids: [3, 4],
+		paymentstatus: [false, false],
+		scholarshipids: [1, 3],
         exams: []
       },
       {
@@ -41,8 +43,9 @@ export class InMemoryDataService implements InMemoryDbService {
         gender: 'Férfi',
         isTutor: false,
         courseids: [],
-		financeids: [1, 4],
-		financestatus: [true, true],
+		paymentids: [1, 4],
+		paymentstatus: [true, true],
+		scholarshipids: [2, 4],
         exams: []
       },
       {
@@ -55,8 +58,9 @@ export class InMemoryDataService implements InMemoryDbService {
         gender: 'Férfi',
         isTutor: false,
         courseids: [3, 4],
-		financeids: [],
-		financestatus: [],
+		paymentids: [],
+		paymentstatus: [],
+		scholarshipids: [],
         exams: []
       }
     ];
@@ -238,7 +242,7 @@ export class InMemoryDataService implements InMemoryDbService {
 		{
 			financeid: 3,
 			name: 'TTIK Utóvizsga díj',
-			deadline:new Date(2017, 6, 11),
+			deadline: new Date(2017, 6, 11),
 			amount: 7000
 		},
 		{
@@ -249,8 +253,35 @@ export class InMemoryDataService implements InMemoryDbService {
 		}
 	];
 	
+	let scholarships = [
+		{
+			scholarshipid: 1,
+			name: 'TTIK Állandó szociális támogatás',
+			date: new Date(2017, 4, 10),
+			amount: 10000
+		},
+		{
+			scholarshipid: 2,
+			name: 'TTIK Tanulmányi ösztöndíj',
+			date: new Date(2017, 4, 10),
+			amount: 15000
+		},
+		{
+			scholarshipid: 3,
+			name: 'TTIK Állandó szociális támogatás',
+			date: new Date(2017, 5, 10),
+			amount: 10000
+		},
+		{
+			scholarshipid: 4,
+			name: 'TTIK Tanulmányi ösztöndíj',
+			date: new Date(2017, 5, 10),
+			amount: 15000
+		}
+	];
+	
 
-    return {users, courses, finances};
+    return {users, courses, scholarships};
   }
 
 }

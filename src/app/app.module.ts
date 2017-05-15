@@ -15,6 +15,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { ExamsComponent } from './exams/exams.component';
 import { CoursesComponent } from './courses/courses.component';
 import { FinancesComponent } from './finances/finances.component';
+import { PaymentsComponent } from './payments/payments.component';
+import { ScholarshipsComponent } from './scholarships/scholarships.component';
 import { MyCoursesComponent } from './my-courses/my-courses.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { GivenNamePipe } from './_pipes/given-name.pipe';
@@ -28,7 +30,14 @@ const appRoutes: Routes = [
     children: [
       { path: 'my-courses', component: MyCoursesComponent },
       { path: 'courses', component: CoursesComponent },
-      { path: 'finances', component: FinancesComponent },
+     { 
+		path: 'finances', 
+		component: FinancesComponent,
+		children: [
+			{ path: 'payments', component: PaymentsComponent },
+			{ path: 'scholarships', component: ScholarshipsComponent }
+		]
+	  }, 
       { path: 'exams', component: ExamsComponent },
       { path: 'static', loadChildren: './static.module#StaticModule' },
       { path: 'profile', component: ProfileComponent }
@@ -50,6 +59,8 @@ const appRoutes: Routes = [
     ExamsComponent,
     CoursesComponent,
     FinancesComponent,
+	PaymentsComponent,
+	ScholarshipsComponent,
     MyCoursesComponent,
     DashboardComponent,
     GivenNamePipe,

@@ -6,14 +6,16 @@ import 'rxjs/add/operator/toPromise';
 import { User } from '../interfaces/user';
 import { Course } from '../interfaces/course';
 import { CourseExam } from '../interfaces/course-exam';
-import { Finance } from '../interfaces/finance';
+import { Payment } from '../interfaces/payment';
+import { Scholarship } from '../interfaces/scholarship';
 
 @Injectable()
 export class GetDataService {
 
   private usersUrl = 'api/users';  // URL to web api
   private coursesUrl = 'api/courses';  // URL to web api
-  private financesUrl = 'api/finances';  // URL to web api
+  private paymentsUrl = 'api/payments';  // URL to web api
+  private scholarshipsUrl = 'api/scholarships';  // URL to web api
 
   private headers = new Headers({'Content-Type': 'application/json'});
 
@@ -33,10 +35,17 @@ export class GetDataService {
                .catch(this.handleError);
   }
   
-  public getFinances(): Promise<Finance[]> {
-    return this.http.get(this.financesUrl)
+   public getPayments(): Promise<Payment[]> {
+    return this.http.get(this.paymentsUrl)
                .toPromise()
-               .then(res => res.json().data as Finance[])
+               .then(res => res.json().data as Payment[])
+               .catch(this.handleError);
+  }
+  
+  public getScholarships(): Promise<Scholarship[]> {
+    return this.http.get(this.scholarshipsUrl)
+               .toPromise()
+               .then(res => res.json().data as Scholarship[])
                .catch(this.handleError);
   }
 
@@ -69,15 +78,15 @@ export class GetDataService {
       });
   }
   
-   public payFinance(userid: number, financeid: number): Promise<void> {
+   public payIt(userid: number, paymentid: number): Promise<void> {
     const url = `${this.usersUrl}/${userid}`;
     return this.http.get(url)
       .toPromise()
       .then(res => {
         let user: User = res.json().data as User;
-        let idx = user.financeids.indexOf(financeid);
+        let idx = user.paymentids.indexOf(paymentid);
         if (idx > -1) {
-          user.financestatus.splice(idx, 1, true);
+          user.paymentstatus.splice(idx, 1, true);
         }
 
         this.http.post(url, user).toPromise();

@@ -1,28 +1,21 @@
 <div class="content">
 
-  <div class="content-header">
+  <div class="content-header t-cell">
     Pénzügyeim
   </div>
 
-  <div id="finances" class="t-table" *ngIf="userFinances.length > 0">
-    <div class="t-header">
-      <div class="t-cell">Befizetés neve</div>
-      <div class="t-cell amount">Összeg</div>
-      <div class="t-cell deadline">Határidő</div>
-      <div class="t-cell status">Státusz</div>
-    </div>
-
-    <div class="t-row" *ngFor="let finance of userFinances">
-      <div class="t-cell">{{ finance.name }}</div>
-      <div class="t-cell amount">{{ finance.amount }}</div>
-      <div class="t-cell deadline">{{ finance.deadline | date: 'yyyy. MM. dd. ' }}</div>
-
-  	  <ng-template #fizetve>
-  		    <div class="t-cell">Fizetve</div>
-  	  </ng-template>
-      <div class="t-cell status" *ngIf="user.financestatus[user.financeids.indexOf(finance.financeid)]==false; else fizetve">
-        <a href="javascript:void(0)" highlight (click)="payFinance(finance)">Fizetés</a>
-  	  </div>
+  <div class="navbar-collapse" id="finances">
+	<ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/dashboard/finances/payments" routerLinkActive="active"><i class="fa fa-minus-square" aria-hidden="true"></i> Befizetések</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/dashboard/finances/scholarships" routerLinkActive="active"><i class="fa fa-plus" aria-hidden="true"></i> Ösztöndíjak</a>
+      </li>
+    </ul>
   </div>
-
+  
+  <router-outlet></router-outlet>
 </div>
+
+
