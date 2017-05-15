@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 
 import { User } from './../interfaces/user';
 import { GetDataService } from './../getdata/get-data.service';
@@ -7,7 +8,20 @@ import { GetDataService } from './../getdata/get-data.service';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  styleUrls: ['./profile.component.css'],
+  animations: [
+    trigger('fadeInState', [
+      state('start', style({
+        opacity: 0.0,
+        transform: 'translateY(-10px)'
+      })),
+      state('end', style({
+        opacity: 1.0,
+        transform: 'translateY(0px)'
+      })),
+      transition('start => end', animate('500ms ease-out'))
+    ])
+  ]
 })
 export class ProfileComponent implements OnInit {
 
@@ -16,6 +30,7 @@ export class ProfileComponent implements OnInit {
   isEditing = false;
   isSaving = false;
   isChangingPw = false;
+  animState: string;
 
   public genders = [
     { value: 'N', display: 'Nő' },
@@ -55,6 +70,10 @@ export class ProfileComponent implements OnInit {
 
   changePassword(): void {
     this.isChangingPw = !this.isChangingPw;
+    this.animState = 'start';
+    setTimeout(() => {
+      this.animState = 'end';
+    }, 100);
   }
 
   handlePasswordChanged(): void {

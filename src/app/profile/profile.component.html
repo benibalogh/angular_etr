@@ -69,7 +69,7 @@
         </tbody>
       </table>
 
-      <app-change-password [user]="user" (finishedSaving)="handlePasswordChanged()" *ngIf="isChangingPw"></app-change-password>
+      <app-change-password [user]="user" (finishedSaving)="handlePasswordChanged()" [@fadeInState]="animState" *ngIf="isChangingPw"></app-change-password>
 
       <div class="card-block">
         <button *ngIf="!isEditing" (click)="editClicked()" [disabled]="isChangingPw" class="btn btn-outline-primary"><i class="fa fa-pencil" aria-hidden="true"></i> Szerkesztés</button>
