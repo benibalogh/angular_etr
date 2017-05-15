@@ -8,7 +8,10 @@
     <button routerLink="../courses" class="btn btn-primary"><i class="fa fa-plus"></i> Új kurzus felvétele</button>
   </div>
 
-  <div id="courses" class="t-table" *ngIf="subscribedCourses.length > 0; else nulldiv">
+  <p *ngIf="loading">Kurzusaid betöltése...</p>
+  <p>{{ infoMessage }}<p>
+
+  <div id="courses" class="t-table" *ngIf="subscribedCourses.length > 0">
     <div class="t-header">
       <div class="t-cell">Kurzus neve</div>
       <div class="t-cell credit">Kredit</div>
@@ -23,5 +26,4 @@
     </div>
   </div>
 
-  <template #nulldiv>Még nincs felvéve kurzusod!</template>
 </div>

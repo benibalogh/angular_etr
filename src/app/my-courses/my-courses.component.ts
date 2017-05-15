@@ -13,8 +13,8 @@ import { User } from '../interfaces/user';
 export class MyCoursesComponent implements OnInit {
   user: User;
   userid: number;
-  username: string;
-  errorMessage: string;
+  infoMessage: string;
+  loading: boolean;
   subscribedCourses: Course[] = [];
 
   constructor(private router: Router, private getDataService: GetDataService) { }
@@ -23,7 +23,6 @@ export class MyCoursesComponent implements OnInit {
     if (sessionStorage.getItem('name') === null) {
       this.router.navigate(['/login']);
     } else {
-      this.username = sessionStorage.getItem('name');
       this.userid = parseInt(sessionStorage.getItem('userid'), 10);
 
       this.getUserAndCourses();
@@ -31,14 +30,19 @@ export class MyCoursesComponent implements OnInit {
   }
 
   getUserAndCourses(): void {
+    this.loading = true;
     this.getDataService.getUserById(this.userid).then(user => {
       this.user = user;
 
       this.getDataService.getCourses().then(courses => {
+        this.loading = false;
         for (let c = 0; c < courses.length; c++) {
           if (this.user.courseids.indexOf(courses[c].courseid) > -1) {
             this.subscribedCourses.push(courses[c]);
           }
+        }
+        if (!this.subscribedCourses.length) {
+          this.infoMessage = 'Még nincs felvéve kurzusod!';
         }
       });
     });
@@ -49,6 +53,9 @@ export class MyCoursesComponent implements OnInit {
       let idx = this.subscribedCourses.indexOf(course);
       if (idx > -1) {
         this.subscribedCourses.splice(idx, 1);
+        if (!this.subscribedCourses.length) {
+          this.infoMessage = 'Még nincs felvéve kurzusod!';
+        }
       }
     });
   }

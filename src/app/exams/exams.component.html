@@ -4,6 +4,9 @@
     Vizsgajelentkezés
   </div>
 
+  <p *ngIf="loading">Vizsgaalkalmak betöltése...</p>
+  <p>{{ infoMessage }}</p>
+
   <div id="exams" class="t-table" *ngIf="subscribedCourses.length > 0">
     <div class="t-header">
       <div class="t-cell">Kurzus neve</div>

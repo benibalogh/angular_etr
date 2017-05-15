@@ -15,9 +15,10 @@ export class ExamsComponent implements OnInit {
   user: User;
   userid: number;
   username: string;
-  errorMessage: string;
+  infoMessage: string;
   courses: Course[] = [];
   subscribedCourses: Course[] = [];
+  loading: boolean;
 
   constructor(private router: Router, private getDataService: GetDataService) { }
 
@@ -33,6 +34,7 @@ export class ExamsComponent implements OnInit {
   }
 
   getUserAndCourses(): void {
+    this.loading = true;
     this.getDataService.getUserById(this.userid).then(user => {
       this.user = user;
 
@@ -44,6 +46,11 @@ export class ExamsComponent implements OnInit {
             this.subscribedCourses.push(courses[c]);
           }
         }
+
+        if (!this.subscribedCourses.length) {
+          this.infoMessage = 'Nincs felvett kurzusod!';
+        }
+        this.loading = false;
       });
     });
   }
