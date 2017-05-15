@@ -12,8 +12,6 @@
 
 #scholarships .t-cell {
   padding: 5px 10px;
-  display: inline-block;
-  width: 20%;
 }
 
 #scholarships .t-cell.amount {
