@@ -3,12 +3,12 @@
 		<div class="t-cell">Ösztöndíj neve</div>
 		<div class="t-cell amount">Összeg</div>
 		<div class="t-cell deadline">Kiutalás dátuma</div>
-	 
+
     </div>
     <div class="t-row" *ngFor="let payout of userScholarships">
 		<div class="t-cell">{{ payout.name }}</div>
-		<div class="t-cell amount">{{ payout.amount }}</div>
+		<div class="t-cell amount">{{ payout.amount | forint }}</div>
 		<div class="t-cell date">{{ payout.date | date: 'yyyy. MM. dd. ' }}</div>
-	 
+
     </div>
 </div>

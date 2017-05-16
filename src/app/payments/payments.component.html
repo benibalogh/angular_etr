@@ -8,7 +8,7 @@
     </div>
     <div class="t-row" *ngFor="let payment of userPayments">
 		<div class="t-cell">{{ payment.name }}</div>
-		<div class="t-cell amount">{{ payment.amount }}</div>
+		<div class="t-cell amount">{{ payment.amount | forint }}</div>
 		<div class="t-cell deadline">{{ payment.deadline | date: 'yyyy. MM. dd. ' }}</div>
 
 		<ng-template #fizetve>

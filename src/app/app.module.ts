@@ -25,6 +25,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { NameService } from './_services/name.service';
 import { AuthGuardService } from './_guards/auth-guard.service';
 import { AuthService } from './_services/auth.service';
+import { ForintPipe } from './_pipes/forint.pipe';
 
 const appRoutes: Routes = [
   {
@@ -74,7 +75,8 @@ const appRoutes: Routes = [
     DashboardComponent,
     GivenNamePipe,
     ProfileComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    ForintPipe
   ],
   imports: [
     BrowserModule,

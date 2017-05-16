@@ -9,7 +9,7 @@ export class GivenNamePipe implements PipeTransform {
     if (value) {
       let spaceIndex = value.indexOf(' ');
       if (spaceIndex !== -1) {
-        return value.slice(spaceIndex+1);
+        return value.slice(spaceIndex + 1);
       }
     }
     return value;
