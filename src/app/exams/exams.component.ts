@@ -59,11 +59,7 @@ export class ExamsComponent implements OnInit {
     for (let i = 0; i < this.user.exams.length; i++) {
       var courseExam: CourseExam = this.user.exams[i];
       if (courseExam.courseId === course.courseid) {
-        if (courseExam.examId === exam.courseExamId) {
-          return true;
-        } else {
-          return false;
-        }
+        return courseExam.examId === exam.courseExamId;
       }
     }
 
