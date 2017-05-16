@@ -12,7 +12,12 @@ export class AuthService {
   private usersUrl = 'api/users';  // URL to web api
   private headers = new Headers({'Content-Type': 'application/json'});
 
-  constructor(private http: Http) { }
+  constructor(private http: Http) {
+    const name = localStorage.getItem('name');
+    if (name !== null) {
+      this.isLoggedIn = true;
+    }
+  }
 
   login(username: string, password: string): Observable<boolean> {
     const url = `${this.usersUrl}?username=^${username}$`;
@@ -24,23 +29,20 @@ export class AuthService {
           return false;  // no such username
         } else if (data[0].password === password) {
           this.isLoggedIn = true;
-          sessionStorage.setItem('userid', data[0].id.toString());
-          sessionStorage.setItem('name', data[0].name);
+          localStorage.setItem('userid', data[0].id.toString());
+          localStorage.setItem('name', data[0].name);
           return true;  // username and password is correct
         } else {
           this.errorMessage = 'Nem jó a jelszó!';
           return false;  // password is incorrect
         }
-      })
+      });
   }
 
   logout(): void {
+    localStorage.clear();
     this.isLoggedIn = false;
-  }
-
-  private handleError(error: any): Promise<any> {
-    console.error('An error occurred with server request', error); // for demo purposes only
-    return Promise.reject(error.message || error);
+    this.errorMessage = '';
   }
 
 }

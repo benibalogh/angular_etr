@@ -10,7 +10,7 @@ import { Payment } from '../interfaces/payment';
 import { Scholarship } from '../interfaces/scholarship';
 
 @Injectable()
-export class GetDataService {
+export class DataService {
 
   private usersUrl = 'api/users';  // URL to web api
   private coursesUrl = 'api/courses';  // URL to web api

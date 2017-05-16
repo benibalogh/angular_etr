@@ -3,7 +3,8 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
 import { GivenNamePipe } from './../_pipes/given-name.pipe';
-import { NameService } from './../name.service';
+import { AuthService } from './../_services/auth.service';
+import { NameService } from '../_services/name.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,17 +16,18 @@ export class DashboardComponent implements OnInit, OnDestroy {
   name: string;
   subscription: Subscription;
 
-  constructor(private router: Router, private _nameService: NameService) { }
+  constructor(private router: Router, private authService: AuthService, private _nameService: NameService) { }
 
   ngOnInit() {
     this.subscription = this._nameService.nameItem$
         .subscribe(name => this.name = name);  // subscribe for nameItem stream to receive updates for the displayed name of the user
 
-    this.name = sessionStorage.getItem('name');
+    this.name = localStorage.getItem('name');
+    this.router.navigate(['/dashboard/my-courses']);
   }
 
   logout(): void {
-    sessionStorage.clear();
+    this.authService.logout();
   }
 
   ngOnDestroy() {

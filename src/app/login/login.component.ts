@@ -4,7 +4,7 @@ import { NgForm} from '@angular/forms';
 import { Http } from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { User } from '../interfaces/user';
-import { AuthService } from './../auth.service';
+import { AuthService } from '../_services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -19,9 +19,7 @@ export class LoginComponent implements OnInit {
     debug: Boolean;
     loading = false;
 
-    constructor(private http: Http, private authService: AuthService, private router: Router) {
-      authService.errorMessage = '';
-    }
+    constructor(private http: Http, private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     // if (sessionStorage.getItem('name') !== null) {

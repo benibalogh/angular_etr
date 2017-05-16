@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { GetDataService } from '../getdata/get-data.service';
+import { DataService } from '../data/data.service';
 import { Course } from '../interfaces/course';
 import { User } from '../interfaces/user';
 
@@ -18,24 +18,24 @@ export class CoursesComponent implements OnInit {
   courses: Course[] = [];
   subscribedCourses: Course[] = [];
 
-  constructor(private router: Router, private getDataService: GetDataService) { }
+  constructor(private router: Router, private dataService: DataService) { }
 
   ngOnInit() {
-    if (sessionStorage.getItem('name') === null) {
+    if (localStorage.getItem('name') === null) {
       this.router.navigate(['/login']);
     } else {
-      this.username = sessionStorage.getItem('name');
-      this.userid = parseInt(sessionStorage.getItem('userid'), 10);
+      this.username = localStorage.getItem('name');
+      this.userid = parseInt(localStorage.getItem('userid'), 10);
 
       this.getUserAndCourses();
     }
   }
 
   getUserAndCourses(): void {
-    this.getDataService.getUserById(this.userid).then(user => {
+    this.dataService.getUserById(this.userid).then(user => {
       this.user = user;
 
-      this.getDataService.getCourses().then(courses => {
+      this.dataService.getCourses().then(courses => {
         this.courses = courses;
 
         for (let c = 0; c < courses.length; c++) {
@@ -48,7 +48,7 @@ export class CoursesComponent implements OnInit {
   }
 
   takeCourse(course: Course): void {
-    this.getDataService.takeCourse(this.userid, course.courseid).then(() => {
+    this.dataService.takeCourse(this.userid, course.courseid).then(() => {
       this.router.navigate(['dashboard/my-courses']);
       this.subscribedCourses.push(course);
     });

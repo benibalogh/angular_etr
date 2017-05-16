@@ -1,88 +1,88 @@
-<div *ngIf="user">
-  <div class="container">
-    <div class="card" style="margin: auto; margin-top: 1rem">
-      <h3 class="card-header">Üdv, {{user.name | givenName}}</h3>
-      <div class="card-block">
-        <h6 class="card-text">Itt tekinthehetd meg és módosíthatod személyes adataidat.</h6>
-      </div>
+<p class="text-center p-margin" *ngIf="!user">Adataid betöltése...</p>
 
-      <table *ngIf="!isEditing" class="table">
-        <tbody>
-          <tr>
-            <td>Név:</td>
-            <td>{{user.name}}</td>
-          </tr>
-          <tr>
-            <td>Felhasználónév:</td>
-            <td>{{user.username}}</td>
-          </tr>
-          <tr>
-            <td>Email:</td>
-            <td>{{user.email}}</td>
-          </tr>
-          <tr>
-            <td>Születési dátum:</td>
-            <td>{{user.birthdate | date:"yyyy. MM. dd."}}</td>
-          </tr>
-          <tr>
-            <td>Nem:</td>
-            <td>{{user.gender}}</td>
-          </tr>
-        </tbody>
-      </table>
+<div class="container" *ngIf="user">
+  <div class="card">
+    <h3 class="card-header">Üdv, {{user.name | givenName}}</h3>
+    <div class="card-block">
+      <h6 class="card-text">Itt tekinthehetd meg és módosíthatod személyes adataidat.</h6>
+    </div>
 
-      <table *ngIf="isEditing" class="table">
-        <tbody>
-          <tr>
-            <td>Név:</td>
-            <td>
-              <input [disabled]="isSaving" [ngModel]="user.name" (ngModelChange)="nameChanged($event)" id="inputName" class="form-control" required autofocus>
-            <td>
-          </tr>
-          <tr>
-            <td>Felhasználónév:</td>
-            <td>
-              <input [disabled]="isSaving" [(ngModel)]="user.username" id="inputUsername" class="form-control" required>
-            </td>
-          </tr>
-          <tr>
-            <td>Email:</td>
-            <td>
-              <input [disabled]="isSaving" [(ngModel)]="user.email" id="inputEmail" class="form-control" required>
-            </td>
-          </tr>
-          <tr>
-            <td>Születési dátum:</td>
-            <td>
-              <input type="date" [disabled]="isSaving" [ngModel]="user.birthdate | date:'yyyy-MM-dd'" (ngModelChange)="user.birthdate = $event" id="inputBirthdate" class="form-control" required>
-            </td>
-          </tr>
-          <tr>
-            <td>Nem:</td>
-            <td>
-              <label class="radio" *ngFor="let gender of genders">
-                <input type="radio" name="gender" [disabled]="isSaving" [(ngModel)]="user.gender" [value]="gender.display">
-                {{ gender.display }}
-              </label>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <table *ngIf="!isEditing" class="table">
+      <tbody>
+        <tr>
+          <td>Név:</td>
+          <td>{{user.name}}</td>
+        </tr>
+        <tr>
+          <td>Felhasználónév:</td>
+          <td>{{user.username}}</td>
+        </tr>
+        <tr>
+          <td>Email:</td>
+          <td>{{user.email}}</td>
+        </tr>
+        <tr>
+          <td>Születési dátum:</td>
+          <td>{{user.birthdate | date:"yyyy. MM. dd."}}</td>
+        </tr>
+        <tr>
+          <td>Nem:</td>
+          <td>{{user.gender}}</td>
+        </tr>
+      </tbody>
+    </table>
 
-      <div *ngIf="errorMessage" class="text-center">
-        <span class="text-danger">
-          <i class="fa fa-close" aria-hidden="true"></i> {{ errorMessage }}
-        </span>
-      </div>
+    <table *ngIf="isEditing" class="table">
+      <tbody>
+        <tr>
+          <td>Név:</td>
+          <td>
+            <input [disabled]="isSaving" [ngModel]="user.name" (ngModelChange)="nameChanged($event)" id="inputName" class="form-control" required autofocus>
+          <td>
+        </tr>
+        <tr>
+          <td>Felhasználónév:</td>
+          <td>
+            <input [disabled]="isSaving" [(ngModel)]="user.username" id="inputUsername" class="form-control" required>
+          </td>
+        </tr>
+        <tr>
+          <td>Email:</td>
+          <td>
+            <input [disabled]="isSaving" [(ngModel)]="user.email" id="inputEmail" class="form-control" required>
+          </td>
+        </tr>
+        <tr>
+          <td>Születési dátum:</td>
+          <td>
+            <input type="date" [disabled]="isSaving" [ngModel]="user.birthdate | date:'yyyy-MM-dd'" (ngModelChange)="user.birthdate = $event" id="inputBirthdate" class="form-control" required>
+          </td>
+        </tr>
+        <tr>
+          <td>Nem:</td>
+          <td>
+            <label class="radio" *ngFor="let gender of genders">
+              <input type="radio" name="gender" [disabled]="isSaving" [(ngModel)]="user.gender" [value]="gender.display">
+              {{ gender.display }}
+            </label>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-      <app-change-password [user]="user" (finishedSaving)="handlePasswordChanged()" [@fadeInOut]="animState" *ngIf="isChangingPw"></app-change-password>
+    <div *ngIf="errorMessage" class="text-center">
+      <span class="text-danger">
+        <i class="fa fa-close" aria-hidden="true"></i> {{ errorMessage }}
+      </span>
+    </div>
 
-      <div class="card-block">
-        <button *ngIf="!isEditing" (click)="editClicked()" [disabled]="isChangingPw" class="btn btn-outline-primary"><i class="fa fa-pencil" aria-hidden="true"></i> Szerkesztés</button>
-        <button *ngIf="!isEditing" (click)="changePassword()" class="btn btn-secondary"><i class="fa fa-key" aria-hidden="true"></i> Jelszó megváltoztatása</button>
-        <button *ngIf="isEditing" (click)="saveClicked()" [disabled]="isSaving" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i> Mentés</button>
-        <button *ngIf="isEditing" (click)="cancelClicked()" [disabled]="isSaving" class="btn btn-secondary"><i class="fa fa-ban" aria-hidden="true"></i> Mégse</button>
-      </div>
+    <app-change-password [user]="user" (finishedSaving)="handlePasswordChanged()" [@fadeInOut]="animState" *ngIf="isChangingPw"></app-change-password>
+
+    <div class="card-block">
+      <button *ngIf="!isEditing" (click)="editClicked()" [disabled]="isChangingPw" class="btn btn-outline-primary"><i class="fa fa-pencil" aria-hidden="true"></i> Szerkesztés</button>
+      <button *ngIf="!isEditing" (click)="changePassword()" class="btn btn-secondary"><i class="fa fa-key" aria-hidden="true"></i> Jelszó megváltoztatása</button>
+      <button *ngIf="isEditing" (click)="saveClicked()" [disabled]="isSaving" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i> Mentés</button>
+      <button *ngIf="isEditing" (click)="cancelClicked()" [disabled]="isSaving" class="btn btn-secondary"><i class="fa fa-ban" aria-hidden="true"></i> Mégse</button>
     </div>
   </div>
 </div>

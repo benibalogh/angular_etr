@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-import { GetDataService } from './../getdata/get-data.service';
+import { DataService } from '../data/data.service';
 import { User } from './../interfaces/user';
 
 @Component({
@@ -17,7 +17,7 @@ export class ChangePasswordComponent implements OnInit {
   pw2: string;
   errorMessage: string;
 
-  constructor(private getDataService: GetDataService) { }
+  constructor(private dataService: DataService) { }
 
   ngOnInit() { }
 
@@ -31,7 +31,7 @@ export class ChangePasswordComponent implements OnInit {
     } else {
       this.user.password = this.pw1;
       this.errorMessage = null;
-      this.getDataService.updateUser(this.user)
+      this.dataService.updateUser(this.user)
         .then( () => {
           this.isSaving = false;
           this.finishedSaving.emit();

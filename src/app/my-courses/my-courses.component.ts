@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { GetDataService } from '../getdata/get-data.service';
+import { DataService } from '../data/data.service';
 import { Course } from '../interfaces/course';
 import { User } from '../interfaces/user';
 
@@ -17,13 +17,13 @@ export class MyCoursesComponent implements OnInit {
   loading: boolean;
   subscribedCourses: Course[] = [];
 
-  constructor(private router: Router, private getDataService: GetDataService) { }
+  constructor(private router: Router, private dataService: DataService) { }
 
   ngOnInit() {
-    if (sessionStorage.getItem('name') === null) {
+    if (localStorage.getItem('name') === null) {
       this.router.navigate(['/login']);
     } else {
-      this.userid = parseInt(sessionStorage.getItem('userid'), 10);
+      this.userid = parseInt(localStorage.getItem('userid'), 10);
 
       this.getUserAndCourses();
     }
@@ -31,10 +31,10 @@ export class MyCoursesComponent implements OnInit {
 
   getUserAndCourses(): void {
     this.loading = true;
-    this.getDataService.getUserById(this.userid).then(user => {
+    this.dataService.getUserById(this.userid).then(user => {
       this.user = user;
 
-      this.getDataService.getCourses().then(courses => {
+      this.dataService.getCourses().then(courses => {
         this.loading = false;
         for (let c = 0; c < courses.length; c++) {
           if (this.user.courseids.indexOf(courses[c].courseid) > -1) {
@@ -49,7 +49,7 @@ export class MyCoursesComponent implements OnInit {
   }
 
   dropCourse(course: Course): void {
-    this.getDataService.dropCourse(this.userid, course.courseid).then(() => {
+    this.dataService.dropCourse(this.userid, course.courseid).then(() => {
       let idx = this.subscribedCourses.indexOf(course);
       if (idx > -1) {
         this.subscribedCourses.splice(idx, 1);

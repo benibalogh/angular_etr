@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { GetDataService } from '../getdata/get-data.service';
+import { DataService } from '../data/data.service';
 import { Payment } from '../interfaces/payment';
 import { User } from '../interfaces/user';
 
@@ -16,24 +16,24 @@ export class PaymentsComponent implements OnInit {
   errorMessage: string;
   userPayments: Payment[] = [];
 
-  constructor(private router: Router, private getDataService: GetDataService) { }
+  constructor(private router: Router, private DataService: DataService) { }
 
   ngOnInit() {
-    if (sessionStorage.getItem('name') === null) {
+    if (localStorage.getItem('name') === null) {
       this.router.navigate(['/login']);
     } else {
-      this.username = sessionStorage.getItem('name');
-      this.userid = parseInt(sessionStorage.getItem('userid'), 10);
+      this.username = localStorage.getItem('name');
+      this.userid = parseInt(localStorage.getItem('userid'), 10);
 
       this.getUserAndPayments();
     }
   }
 
   getUserAndPayments(): void {
-    this.getDataService.getUserById(this.userid).then(user => {
+    this.DataService.getUserById(this.userid).then(user => {
       this.user = user;
 
-      this.getDataService.getPayments().then(payments => {
+      this.DataService.getPayments().then(payments => {
         for (let p = 0; p < payments.length; p++) {
           if (this.user.paymentids.indexOf(payments[p].paymentid) > -1) {
             this.userPayments.push(payments[p]);
@@ -44,7 +44,7 @@ export class PaymentsComponent implements OnInit {
   }
 
   payIt(payment: Payment): void {
-    this.getDataService.payIt(this.userid, payment.paymentid).then(() => {
+    this.DataService.payIt(this.userid, payment.paymentid).then(() => {
       let idx = this.userPayments.indexOf(payment);
       if (idx > -1) {
         this.user.paymentstatus.splice(idx, 1, true);

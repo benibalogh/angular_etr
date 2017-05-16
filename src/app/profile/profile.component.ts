@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 
 import { User } from './../interfaces/user';
-import { GetDataService } from './../getdata/get-data.service';
-import { NameService } from './../name.service';
+import { DataService } from '../data/data.service';
+import { NameService } from '../_services/name.service';
 
 @Component({
   selector: 'app-profile',
@@ -43,19 +43,19 @@ export class ProfileComponent implements OnInit {
     { value: 'F', display: 'Férfi' }
   ];
 
-  constructor(private router: Router, private getDataService: GetDataService, private _nameService: NameService) { }
+  constructor(private router: Router, private dataService: DataService, private _nameService: NameService) { }
 
   ngOnInit() {
     this.getUser();
   }
 
   getUser(): void {
-    this.getDataService.getUserById(parseInt(sessionStorage.getItem('userid'), 10))
+    this.dataService.getUserById(parseInt(localStorage.getItem('userid'), 10))
       .then( user => this.user = user);
   }
 
   updateUser(): void {
-    this.getDataService.updateUser(this.user)
+    this.dataService.updateUser(this.user)
         .then( () => {
           this.isEditing = false;
           this.isSaving = false;
@@ -75,7 +75,7 @@ export class ProfileComponent implements OnInit {
 
   saveClicked(): void {
     // save to db
-    this.getDataService.getUserByUsername(this.user.username)
+    this.dataService.getUserByUsername(this.user.username)
         .then((res) => {
           if (!Object.keys(res).length)  {  // check for empty res -> no user with the same username exists
             this.updateUser();

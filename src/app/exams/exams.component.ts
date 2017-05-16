@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { GetDataService } from '../getdata/get-data.service';
+import { DataService } from '../data/data.service';
 import { CourseExam } from '../interfaces/course-exam';
 import { Course } from '../interfaces/course';
 import { Exam } from '../interfaces/exam';
@@ -20,14 +20,14 @@ export class ExamsComponent implements OnInit {
   subscribedCourses: Course[] = [];
   loading: boolean;
 
-  constructor(private router: Router, private getDataService: GetDataService) { }
+  constructor(private router: Router, private dataService: DataService) { }
 
   ngOnInit() {
-    if (sessionStorage.getItem('name') === null) {
+    if (localStorage.getItem('name') === null) {
       this.router.navigate(['/login']);
     } else {
-      this.username = sessionStorage.getItem('name');
-      this.userid = parseInt(sessionStorage.getItem('userid'), 10);
+      this.username = localStorage.getItem('name');
+      this.userid = parseInt(localStorage.getItem('userid'), 10);
 
       this.getUserAndCourses();
     }
@@ -35,10 +35,10 @@ export class ExamsComponent implements OnInit {
 
   getUserAndCourses(): void {
     this.loading = true;
-    this.getDataService.getUserById(this.userid).then(user => {
+    this.dataService.getUserById(this.userid).then(user => {
       this.user = user;
 
-      this.getDataService.getCourses().then(courses => {
+      this.dataService.getCourses().then(courses => {
         this.courses = courses;
 
         for (let c = 0; c < courses.length; c++) {
@@ -82,19 +82,19 @@ export class ExamsComponent implements OnInit {
   }
 
   takeExam(course: Course, exam: Exam): void {
-    this.getDataService.takeExam(this.userid, course.courseid, exam.courseExamId).then(user => {
+    this.dataService.takeExam(this.userid, course.courseid, exam.courseExamId).then(user => {
       this.user = user;
     });
   }
 
   changeExam(course: Course, exam: Exam): void {
-    this.getDataService.changeExam(this.userid, course.courseid, exam.courseExamId).then(user => {
+    this.dataService.changeExam(this.userid, course.courseid, exam.courseExamId).then(user => {
       this.user = user;
     });
   }
 
   dropExam(course: Course, exam: Exam): void {
-    this.getDataService.dropExam(this.userid, course.courseid, exam.courseExamId).then(user => {
+    this.dataService.dropExam(this.userid, course.courseid, exam.courseExamId).then(user => {
       this.user = user;
     });
   }

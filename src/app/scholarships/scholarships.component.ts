@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { GetDataService } from '../getdata/get-data.service';
+import { DataService } from '../data/data.service';
 import { Scholarship } from '../interfaces/scholarship';
 import { User } from '../interfaces/user';
 
@@ -16,24 +16,24 @@ export class ScholarshipsComponent implements OnInit {
   errorMessage: string;
   userScholarships: Scholarship[] = [];
 
-  constructor(private router: Router, private getDataService: GetDataService) { }
+  constructor(private router: Router, private dataService: DataService) { }
 
   ngOnInit() {
-    if (sessionStorage.getItem('name') === null) {
+    if (localStorage.getItem('name') === null) {
       this.router.navigate(['/login']);
     } else {
-      this.username = sessionStorage.getItem('name');
-      this.userid = parseInt(sessionStorage.getItem('userid'), 10);
+      this.username = localStorage.getItem('name');
+      this.userid = parseInt(localStorage.getItem('userid'), 10);
 
       this.getUserAndScholarships();
     }
   }
 
   getUserAndScholarships(): void {
-    this.getDataService.getUserById(this.userid).then(user => {
+    this.dataService.getUserById(this.userid).then(user => {
       this.user = user;
 
-      this.getDataService.getScholarships().then(scholarships => {
+      this.dataService.getScholarships().then(scholarships => {
         for (let s = 0; s < scholarships.length; s++) {
           if (this.user.scholarshipids.indexOf(scholarships[s].scholarshipid) > -1) {
             this.userScholarships.push(scholarships[s]);

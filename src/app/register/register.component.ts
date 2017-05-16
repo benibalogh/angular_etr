@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GetDataService } from './../getdata/get-data.service';
+import { DataService } from '../data/data.service';
 import { Router } from '@angular/router';
 
 import { User } from './../interfaces/user';
@@ -21,7 +21,7 @@ export class RegisterComponent implements OnInit {
     { value: 'F', display: 'Férfi' }
   ];
 
-  constructor(private getDataService: GetDataService, private router: Router) { }
+  constructor(private dataService: DataService, private router: Router) { }
 
   ngOnInit() {
     this.user = {
@@ -44,7 +44,7 @@ export class RegisterComponent implements OnInit {
 
   register(): void {
     this.loading = true;
-    this.getDataService.registerUser(this.user)
+    this.dataService.registerUser(this.user)
       .then((res) => {
         if (res !== null) {
           this.router.navigate(['/login']);

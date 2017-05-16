@@ -5,8 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 
-import { LoginModule } from './login.module';
-import { DataModule } from './data.module';
+import { LoginModule } from './login/login.module';
+import { DataModule } from './data/data.module';
 
 import { HighlightDirective } from './_directives/highlight.directive';
 
@@ -22,8 +22,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { GivenNamePipe } from './_pipes/given-name.pipe';
 import { ProfileComponent } from './profile/profile.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { NameService } from './_services/name.service';
 import { AuthGuardService } from './_guards/auth-guard.service';
-import { AuthService } from './auth.service';
+import { AuthService } from './_services/auth.service';
 
 const appRoutes: Routes = [
   {
@@ -45,7 +46,7 @@ const appRoutes: Routes = [
             ]
           },
           { path: 'exams', component: ExamsComponent },
-          { path: 'static', loadChildren: './static.module#StaticModule' },
+          { path: 'static', loadChildren: './_static/static.module#StaticModule' },
           { path: 'profile', component: ProfileComponent }
         ]
       }
@@ -53,7 +54,7 @@ const appRoutes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/login',
+    redirectTo: '/dashboard/my-courses',
     pathMatch: 'full'
   },
   { path: '**', component: PageNotFoundComponent }
@@ -84,6 +85,7 @@ const appRoutes: Routes = [
     DataModule,
     RouterModule.forRoot(appRoutes)
   ],
+  providers: [ NameService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

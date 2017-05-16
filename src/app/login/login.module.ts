@@ -4,10 +4,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { AuthGuardService } from './_guards/auth-guard.service';
-import { AuthService } from './auth.service';
+import { LoginComponent } from './login.component';
+import { RegisterComponent } from '../register/register.component';
+import { AuthGuardService } from '../_guards/auth-guard.service';
+import { AuthService } from '../_services/auth.service';
 
 const loginRoutes: Routes = [
   { path: 'login', component: LoginComponent },

@@ -12,7 +12,7 @@ export class FinancesComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
-    this.name = sessionStorage.getItem('name');
+    this.name = localStorage.getItem('name');
     if (this.name === null) {
       this.router.navigate(['/login']);
     }

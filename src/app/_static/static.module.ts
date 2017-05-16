@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { routing } from './static.routing';
 
-import { TeachersComponent } from './teachers/teachers.component';
-import { ClassroomsComponent } from './classrooms/classrooms.component';
+import { TeachersComponent } from '../teachers/teachers.component';
+import { ClassroomsComponent } from '../classrooms/classrooms.component';
 
 @NgModule({
   declarations: [
