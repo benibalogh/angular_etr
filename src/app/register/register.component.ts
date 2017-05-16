@@ -51,7 +51,6 @@ export class RegisterComponent implements OnInit {
         } else {
           this.errorMessage = 'Létező felhasználónév, válassz másikat!';
           this.loading = false;
-          //console.log('Already registered!');
         }
         // this.getDataService.getUser()
       });

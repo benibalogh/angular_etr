@@ -22,25 +22,33 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { GivenNamePipe } from './_pipes/given-name.pipe';
 import { ProfileComponent } from './profile/profile.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { AuthGuardService } from './_guards/auth-guard.service';
+import { AuthService } from './auth.service';
 
 const appRoutes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
+    canActivate: [AuthGuardService],
     children: [
-      { path: 'my-courses', component: MyCoursesComponent },
-      { path: 'courses', component: CoursesComponent },
-    {
-    path: 'finances',
-    component: FinancesComponent,
-    children: [
-      { path: 'payments', component: PaymentsComponent },
-      { path: 'scholarships', component: ScholarshipsComponent }
-    ]
-    },
-      { path: 'exams', component: ExamsComponent },
-      { path: 'static', loadChildren: './static.module#StaticModule' },
-      { path: 'profile', component: ProfileComponent }
+      {
+        path: '',
+        children: [
+          { path: 'my-courses', component: MyCoursesComponent },
+          { path: 'courses', component: CoursesComponent },
+          {
+            path: 'finances',
+            component: FinancesComponent,
+            children: [
+              { path: 'payments', component: PaymentsComponent },
+              { path: 'scholarships', component: ScholarshipsComponent }
+            ]
+          },
+          { path: 'exams', component: ExamsComponent },
+          { path: 'static', loadChildren: './static.module#StaticModule' },
+          { path: 'profile', component: ProfileComponent }
+        ]
+      }
     ]
   },
   {

@@ -22,12 +22,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
         .subscribe(name => this.name = name);  // subscribe for nameItem stream to receive updates for the displayed name of the user
 
     this.name = sessionStorage.getItem('name');
-    if (this.name === null) {
-      this.router.navigate(['/login']);
-    } else {
-      this._nameService.changeName(this.name);
-    }
-
   }
 
   logout(): void {

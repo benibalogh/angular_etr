@@ -6,6 +6,8 @@ import { HttpModule } from '@angular/http';
 
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { AuthGuardService } from './_guards/auth-guard.service';
+import { AuthService } from './auth.service';
 
 const loginRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -26,6 +28,10 @@ const loginRoutes: Routes = [
   exports: [
     LoginComponent,
     RegisterComponent
-  ]
+  ],
+  providers: [
+    AuthGuardService,
+    AuthService
+  ],
 })
 export class LoginModule { }

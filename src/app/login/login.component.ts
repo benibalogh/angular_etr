@@ -3,8 +3,8 @@ import { Router, ActivatedRoute  } from '@angular/router';
 import { NgForm} from '@angular/forms';
 import { Http } from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { GetDataService } from '../getdata/get-data.service';
 import { User } from '../interfaces/user';
+import { AuthService } from './../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -19,12 +19,14 @@ export class LoginComponent implements OnInit {
     debug: Boolean;
     loading = false;
 
-    constructor(private http: Http, private getDataService: GetDataService, private router: Router) { }
+    constructor(private http: Http, private authService: AuthService, private router: Router) {
+      authService.errorMessage = '';
+    }
 
   ngOnInit() {
-    if (sessionStorage.getItem('name') !== null) {
-      this.router.navigate(['/dashboard']);
-    }
+    // if (sessionStorage.getItem('name') !== null) {
+    //   this.router.navigate(['/dashboard']);
+    // }
   }
 
   login(form: NgForm) {
@@ -35,26 +37,18 @@ export class LoginComponent implements OnInit {
       return;
     } else {
       this.loading = true;
-      this.getDataService.getUsers()
-      .then((users) => {
-        this.users = users;
-        for (const u of this.users) {
-          if (form.value.username === u.username) {
-            if (form.value.password === u.password) {
-              sessionStorage.setItem('userid', u.id.toString());
-              sessionStorage.setItem('name', u.name);
-              this.router.navigate(['/dashboard/my-courses']);
-            } else {
-              this.errorMessage = 'Nem jó a jelszó';
-              this.loading = false;
-              return;
-            }
-          }
-        }
-        this.errorMessage = 'Nincs ilyen felhasználónév';
+      this.authService.login(form.value.username, form.value.password).subscribe(() => {
+        this.errorMessage = this.authService.errorMessage;
         this.loading = false;
-        return;
+        if (this.authService.isLoggedIn) {
+          // Get the redirect URL from our auth service
+          // If no redirect has been set, use the default
+          let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/dashboard/my-courses';
+          // Redirect the user
+          this.router.navigate([redirect]);
+        }
       });
     }
   }
+
 }
