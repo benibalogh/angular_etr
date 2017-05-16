@@ -1,4 +1,6 @@
-<h1>
-  404-es hiba!
-</h1>
-<a [routerLink]="['/']">Vissza a főoldalra</a>
+<div class="not-found">
+  <div class="error-code">404</div>
+  <h3 class="font-bold">A keresett oldal nem található...</h3>
+
+  <button type="button" class="btn btn-info input" (click)="goHome()">Vissza a főoldalra</button>
+</div>

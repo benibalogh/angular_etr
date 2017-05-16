@@ -1,0 +1,16 @@
+.not-found {
+  margin: 0 auto;
+  text-align: center;
+  max-width: 480px;
+  padding: 60px 30px;
+}
+
+.not-found .error-code {
+  color: #2d353c;
+  font-size: 96px;
+  line-height: 100px;
+}
+
+.not-found .input{
+  margin-top: 1rem;
+}
