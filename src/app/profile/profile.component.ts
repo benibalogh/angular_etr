@@ -66,16 +66,18 @@ export class ProfileComponent implements OnInit {
         });
   }
 
-
+  // handler for click event of edit button
   editClicked(): void {
     this.isEditing = true;
     this.userBackup = Object.assign({}, this.user);
   }
 
+  // handler for click event of edit button
   saveClicked(): void {
     // save to db
     this.isSaving = true;
 
+    // check if fields are empty
     if (this.user.name.trim() === '' || this.user.username.trim() === ''
         || this.user.email.trim() === '') {
           this.errorMessage = 'Üres mező!';
@@ -96,6 +98,7 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  // handler for click event of cancel button
   cancelClicked(): void {
     this.isEditing = false;
     this.errorMessage = null;
@@ -103,14 +106,17 @@ export class ProfileComponent implements OnInit {
     this._nameService.changeName(this.userBackup.name);
   }
 
+  // handler for click event of change password button
   changePassword(): void {
     this.isChangingPw = !this.isChangingPw;
   }
 
+  // handler for password changing finished event of change-password component
   handlePasswordChanged(): void {
     this.isChangingPw = false;
   }
 
+  // handler for every change of the name property of user
   nameChanged(name: string): void {
     this.user.name = name;
     // this._nameService.changeName(name);  // canDeactivate should be used to avoid displaying incorrect name on navigation

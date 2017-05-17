@@ -5,6 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class GivenNamePipe implements PipeTransform {
 
+  // removes the first part of a name (before the first space character)
   transform(value: any, args?: any): any {
     if (value) {
       let spaceIndex = value.indexOf(' ');

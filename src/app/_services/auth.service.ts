@@ -10,8 +10,8 @@ export class AuthService {
   redirectUrl: string;
 
   private usersUrl = 'api/users';  // URL to web api
-  private headers = new Headers({'Content-Type': 'application/json'});
 
+  // check localStorage to preserve login state after leaving the app
   constructor(private http: Http) {
     const name = localStorage.getItem('name');
     if (name !== null) {

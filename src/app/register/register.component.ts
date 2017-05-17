@@ -24,6 +24,7 @@ export class RegisterComponent implements OnInit {
   constructor(private dataService: DataService, private router: Router) { }
 
   ngOnInit() {
+    // create a default user
     this.user = {
       id: 0,
       name: '',
@@ -52,10 +53,10 @@ export class RegisterComponent implements OnInit {
           this.errorMessage = 'Létező felhasználónév, válassz másikat!';
           this.loading = false;
         }
-        // this.getDataService.getUser()
       });
   }
 
+  // after a click remove placeholder text of birthdate field
   removeDatePlaceholder(): void {
     this.displayDatePlaceholder = false;
   }

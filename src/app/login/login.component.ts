@@ -12,20 +12,16 @@ import { AuthService } from '../_services/auth.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-    errorMessage: string;
-    users: User[];
-    loggedIn: Boolean;
-    valid: Boolean;
-    debug: Boolean;
-    loading = false;
+  errorMessage: string;
+  users: User[];
+  loggedIn: Boolean;
+  valid: Boolean;
+  debug: Boolean;
+  loading = false;
 
-    constructor(private http: Http, private authService: AuthService, private router: Router) { }
+  constructor(private http: Http, private authService: AuthService, private router: Router) { }
 
-  ngOnInit() {
-    // if (sessionStorage.getItem('name') !== null) {
-    //   this.router.navigate(['/dashboard']);
-    // }
-  }
+  ngOnInit() { }
 
   login(form: NgForm) {
     this.valid = true;

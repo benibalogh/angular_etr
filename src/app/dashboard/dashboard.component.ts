@@ -23,6 +23,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         .subscribe(name => this.name = name);  // subscribe for nameItem stream to receive updates for the displayed name of the user
 
     this.name = localStorage.getItem('name');
+    // display my-courses component as the content of dashboard
     this.router.navigate(['/dashboard/my-courses']);
   }
 
