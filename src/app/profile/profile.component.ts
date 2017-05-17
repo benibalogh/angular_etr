@@ -55,16 +55,15 @@ export class ProfileComponent implements OnInit {
   }
 
   updateUser(): void {
+    //this.isSaving = true;
+    this.errorMessage = null;
+    this._nameService.changeName(this.user.name);
+
     this.dataService.updateUser(this.user)
         .then( () => {
           this.isEditing = false;
           this.isSaving = false;
         });
-    this.isSaving = true;
-    this.errorMessage = null;
-
-    // update name dispalyed in dashboard
-    this._nameService.changeName(this.user.name);
   }
 
 
@@ -75,7 +74,14 @@ export class ProfileComponent implements OnInit {
 
   saveClicked(): void {
     // save to db
-    this.dataService.getUserByUsername(this.user.username)
+    this.isSaving = true;
+
+    if (this.user.name.trim() === '' || this.user.username.trim() === ''
+        || this.user.email.trim() === '') {
+          this.errorMessage = 'Üres mező!';
+          this.isSaving = false;
+    } else {
+      this.dataService.getUserByUsername(this.user.username)
         .then((res) => {
           if (!Object.keys(res).length)  {  // check for empty res -> no user with the same username exists
             this.updateUser();
@@ -84,8 +90,10 @@ export class ProfileComponent implements OnInit {
           } else {
             console.log(res);
             this.errorMessage = 'Foglalt felhasználónév. Válassz másikat!';
+            this.isSaving = false;
           }
         });
+    }
   }
 
   cancelClicked(): void {
