@@ -21,7 +21,7 @@ export class InMemoryDataService implements InMemoryDbService {
       {
         id: 2,
         username: 'user',
-        password: 'alma',
+        password: 'user',
         email: 'user@gmail.com',
         name: 'Vastag Helga',
         birthdate: new Date(1990, 0, 2),
